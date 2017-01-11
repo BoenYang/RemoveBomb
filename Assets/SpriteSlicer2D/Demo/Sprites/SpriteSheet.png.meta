@@ -1,21 +1,7 @@
 fileFormatVersion: 2
 guid: 5bbc0d8c537814141822bce9daedc725
 TextureImporter:
-  fileIDToRecycleName:
-    21300000: SpriteSheet_0
-    21300002: SpriteSheet_1
-    21300004: SpriteSheet_2
-    21300006: SpriteSheet_3
-    21300008: SpriteSheet_4
-    21300010: SpriteSheet_5
-    21300012: SpriteSheet_6
-    21300014: SpriteSheet_7
-    21300016: SpriteSheet_8
-    21300018: SpriteSheet_9
-    21300020: SpriteSheet_10
-    21300022: SpriteSheet_11
-    21300024: SpriteSheet_12
-    21300026: SpriteSheet_13
+  fileIDToRecycleName: {}
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -29,13 +15,13 @@ TextureImporter:
   bumpmap:
     convertToNormalMap: 0
     externalNormalMap: 0
-    heightScale: .25
+    heightScale: 0.25
     normalMapFilter: 0
   isReadable: 0
   grayScaleToAlpha: 0
   generateCubemap: 0
   cubemapConvolution: 0
-  cubemapConvolutionSteps: 8
+  cubemapConvolutionSteps: 7
   cubemapConvolutionExponent: 1.5
   seamlessCubemap: 0
   textureFormat: -3
@@ -49,19 +35,23 @@ TextureImporter:
   lightmap: 0
   rGBM: 0
   compressionQuality: 50
+  allowsAlphaSplitting: 0
   spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
-  spritePivot: {x: .5, y: .5}
+  spritePivot: {x: 0.5, y: 0.5}
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spritePixelsToUnits: 100
   alphaIsTransparency: 1
+  spriteTessellationDetail: -1
   textureType: 8
   buildTargetSettings: []
   spriteSheet:
+    serializedVersion: 2
     sprites:
-    - name: SpriteSheet_0
+    - serializedVersion: 2
+      name: SpriteSheet_0
       rect:
         serializedVersion: 2
         x: 0
@@ -71,7 +61,10 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: SpriteSheet_1
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: SpriteSheet_1
       rect:
         serializedVersion: 2
         x: 630
@@ -81,7 +74,10 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: SpriteSheet_2
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: SpriteSheet_2
       rect:
         serializedVersion: 2
         x: 1279
@@ -91,7 +87,10 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: SpriteSheet_3
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: SpriteSheet_3
       rect:
         serializedVersion: 2
         x: 1660
@@ -101,7 +100,10 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: SpriteSheet_4
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: SpriteSheet_4
       rect:
         serializedVersion: 2
         x: 27
@@ -111,7 +113,10 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: SpriteSheet_5
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: SpriteSheet_5
       rect:
         serializedVersion: 2
         x: 33
@@ -121,7 +126,10 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: SpriteSheet_6
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: SpriteSheet_6
       rect:
         serializedVersion: 2
         x: 708
@@ -131,7 +139,10 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: SpriteSheet_7
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: SpriteSheet_7
       rect:
         serializedVersion: 2
         x: 1732
@@ -141,7 +152,10 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: SpriteSheet_8
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: SpriteSheet_8
       rect:
         serializedVersion: 2
         x: 2313
@@ -151,7 +165,10 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: SpriteSheet_9
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: SpriteSheet_9
       rect:
         serializedVersion: 2
         x: 159
@@ -161,7 +178,10 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: SpriteSheet_10
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: SpriteSheet_10
       rect:
         serializedVersion: 2
         x: 1771
@@ -171,7 +191,10 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: SpriteSheet_11
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: SpriteSheet_11
       rect:
         serializedVersion: 2
         x: 1746
@@ -181,7 +204,10 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: SpriteSheet_12
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: SpriteSheet_12
       rect:
         serializedVersion: 2
         x: 64
@@ -191,7 +217,10 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: SpriteSheet_13
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: SpriteSheet_13
       rect:
         serializedVersion: 2
         x: 136
@@ -201,6 +230,9 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: -1
+    outline: []
   spritePackingTag: 
   userData: 
   assetBundleName: 

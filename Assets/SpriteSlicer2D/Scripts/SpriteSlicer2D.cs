@@ -45,10 +45,37 @@ public static class SpriteSlicer2D
 	/// <param name="worldEndPoint">Slice end point in world coordinates.</param>
 	public static void SliceAllSprites(Vector3 worldStartPoint, Vector3 worldEndPoint)
 	{
+		LayerMask layerMask = -1;
 		List<SpriteSlicer2DSliceInfo> slicedObjectInfo = null;
-		SliceSpritesInternal(worldStartPoint, worldEndPoint, null, 0, true, -1, ref slicedObjectInfo,0);
+		SliceSpritesInternal(worldStartPoint, worldEndPoint, null, 0, true, -1, ref slicedObjectInfo, layerMask, null);
+	}
+	
+	/// <summary>
+	/// Slices any sprites that are intersected by the given vector
+	/// </summary>
+	/// <param name="worldStartPoint">Slice start point in world coordinates.</param>
+	/// <param name="worldEndPoint">Slice end point in world coordinates.</param>
+	/// <param name="layerMask">Layermask to use in raycast operations.</param>
+	public static void SliceAllSprites(Vector3 worldStartPoint, Vector3 worldEndPoint, LayerMask layerMask)
+	{
+		List<SpriteSlicer2DSliceInfo> slicedObjectInfo = null;
+		SliceSpritesInternal(worldStartPoint, worldEndPoint, null, 0, true, -1, ref slicedObjectInfo, layerMask, null);
 	}
 
+	/// <summary>
+	/// Slices any sprites that are intersected by the given vector
+	/// </summary>
+	/// <param name="worldStartPoint">Slice start point in world coordinates.</param>
+	/// <param name="worldEndPoint">Slice end point in world coordinates.</param>
+	/// <param name="layerMask">Layermask to use in raycast operations.</param>
+	/// <param name="tag">Only sprites with the given tag can be cut.</param>
+	public static void SliceAllSprites(Vector3 worldStartPoint, Vector3 worldEndPoint, string tag)
+	{
+		LayerMask layerMask = -1;
+		List<SpriteSlicer2DSliceInfo> slicedObjectInfo = null;
+		SliceSpritesInternal(worldStartPoint, worldEndPoint, null, 0, true, -1, ref slicedObjectInfo, layerMask, tag);
+	}
+	
 	/// <summary>
 	/// Slices any sprites that are intersected by the given vector
 	/// </summary>
@@ -58,15 +85,37 @@ public static class SpriteSlicer2D
 	/// <param name="slicedObjectInfo">A list of SpriteSlicer2DSliceInfo that will be fill out with details about slice locations, slcied objects, and created child objects.</param>
 	public static void SliceAllSprites(Vector3 worldStartPoint, Vector3 worldEndPoint, bool destroySlicedObjects, ref List<SpriteSlicer2DSliceInfo> slicedObjectInfo)
 	{
-		SliceSpritesInternal(worldStartPoint, worldEndPoint, null, 0, destroySlicedObjects, -1, ref slicedObjectInfo,0);
+		LayerMask layerMask = -1;
+		SliceSpritesInternal(worldStartPoint, worldEndPoint, null, 0, destroySlicedObjects, -1, ref slicedObjectInfo, layerMask, null);
 	}
 
-
-    public static void SliceAllSprites(Vector3 worldStartPoint, Vector3 worldEndPoint, bool destroySlicedObjects, ref List<SpriteSlicer2DSliceInfo> slicedObjectInfo, int layerMask)
-    {
-        SliceSpritesInternal(worldStartPoint, worldEndPoint, null, 0, destroySlicedObjects, -1, ref slicedObjectInfo, layerMask);
-    }
-
+	/// <summary>
+	/// Slices any sprites that are intersected by the given vector
+	/// </summary>
+	/// <param name="worldStartPoint">Slice start point in world coordinates.</param>
+	/// <param name="worldEndPoint">Slice end point in world coordinates.</param>
+	/// <param name="destroySlicedObjects">Controls whether the parent objects are automatically destroyed. Set to false if you need to perform additional processing on them after slicing</param>
+	/// <param name="slicedObjectInfo">A list of SpriteSlicer2DSliceInfo that will be fill out with details about slice locations, slcied objects, and created child objects.</param>
+	/// <param name="tag">Only sprites with the given tag can be cut.</param>
+	public static void SliceAllSprites(Vector3 worldStartPoint, Vector3 worldEndPoint, bool destroySlicedObjects, ref List<SpriteSlicer2DSliceInfo> slicedObjectInfo, string tag)
+	{
+		LayerMask layerMask = -1;
+		SliceSpritesInternal(worldStartPoint, worldEndPoint, null, 0, destroySlicedObjects, -1, ref slicedObjectInfo, layerMask, tag);
+	}
+	
+	/// <summary>
+	/// Slices any sprites that are intersected by the given vector
+	/// </summary>
+	/// <param name="worldStartPoint">Slice start point in world coordinates.</param>
+	/// <param name="worldEndPoint">Slice end point in world coordinates.</param>
+	/// <param name="destroySlicedObjects">Controls whether the parent objects are automatically destroyed. Set to false if you need to perform additional processing on them after slicing</param>
+	/// <param name="slicedObjectInfo">A list of SpriteSlicer2DSliceInfo that will be fill out with details about slice locations, slcied objects, and created child objects.</param>
+	/// <param name="layerMask">Layermask to use in raycast operations.</param>
+	public static void SliceAllSprites(Vector3 worldStartPoint, Vector3 worldEndPoint, bool destroySlicedObjects, ref List<SpriteSlicer2DSliceInfo> slicedObjectInfo, LayerMask layerMask)
+	{
+		SliceSpritesInternal(worldStartPoint, worldEndPoint, null, 0, destroySlicedObjects, -1, ref slicedObjectInfo, layerMask, null);
+	}
+	
 	/// <summary>
 	/// Slices any sprites that are intersected by the given vector
 	/// </summary>
@@ -77,11 +126,25 @@ public static class SpriteSlicer2D
 	/// <param name="slicedObjectInfo">A list of SpriteSlicer2DSliceInfo that will be fill out with details about slice locations, slcied objects, and created child objects.</param>
 	public static void SliceAllSprites(Vector3 worldStartPoint, Vector3 worldEndPoint, bool destroySlicedObjects, int maxCutDepth, ref List<SpriteSlicer2DSliceInfo> slicedObjectInfo)
 	{
-		SliceSpritesInternal(worldStartPoint, worldEndPoint, null, 0, destroySlicedObjects, maxCutDepth, ref slicedObjectInfo,0);
+		LayerMask layerMask = -1;
+		SliceSpritesInternal(worldStartPoint, worldEndPoint, null, 0, destroySlicedObjects, maxCutDepth, ref slicedObjectInfo, layerMask, null);
+	}
+	
+	/// <summary>
+	/// Slices any sprites that are intersected by the given vector
+	/// </summary>
+	/// <param name="worldStartPoint">Slice start point in world coordinates.</param>
+	/// <param name="worldEndPoint">Slice end point in world coordinates.</param>
+	/// <param name="destroySlicedObjects">Controls whether the parent objects are automatically destroyed. Set to false if you need to perform additional processing on them after slicing</param>
+	/// <param name="maxCutDepth">The maximum number of times that any sprite can be subdivided</param>
+	/// <param name="slicedObjectInfo">A list of SpriteSlicer2DSliceInfo that will be fill out with details about slice locations, slcied objects, and created child objects.</param>
+	/// <param name="layerMask">Layermask to use in raycast operations.</param>
+	public static void SliceAllSprites(Vector3 worldStartPoint, Vector3 worldEndPoint, bool destroySlicedObjects, int maxCutDepth, ref List<SpriteSlicer2DSliceInfo> slicedObjectInfo, LayerMask layerMask)
+	{
+		SliceSpritesInternal(worldStartPoint, worldEndPoint, null, 0, destroySlicedObjects, maxCutDepth, ref slicedObjectInfo, layerMask, null);
 	}
 
-
-    /// <summary>
+	/// <summary>
 	/// Slices a specific sprite if it is intersected by the given vector
 	/// </summary>
 	/// <param name="worldStartPoint">Slice start point in world coordinates.</param>
@@ -89,8 +152,12 @@ public static class SpriteSlicer2D
 	/// <param name="sprite">The sprite to cut</param>
 	public static void SliceSprite(Vector3 worldStartPoint, Vector3 worldEndPoint, GameObject sprite)
 	{
-		List<SpriteSlicer2DSliceInfo> slicedObjectInfo = null;
-		SliceSpritesInternal(worldStartPoint, worldEndPoint, sprite, 0, true, -1, ref slicedObjectInfo,0);
+		if(sprite)
+		{
+			LayerMask layerMask = -1;
+			List<SpriteSlicer2DSliceInfo> slicedObjectInfo = null;
+			SliceSpritesInternal(worldStartPoint, worldEndPoint, sprite, 0, true, -1, ref slicedObjectInfo, layerMask, null);
+		}
 	}
 
 	/// <summary>
@@ -103,7 +170,11 @@ public static class SpriteSlicer2D
 	/// <param name="slicedObjectInfo">A list of SpriteSlicer2DSliceInfo that will be fill out with details about slice locations, slcied objects, and created child objects.</param>
 	public static void SliceSprite(Vector3 worldStartPoint, Vector3 worldEndPoint, GameObject sprite, bool destroySlicedObjects, ref List<SpriteSlicer2DSliceInfo> slicedObjectInfo)
 	{
-		SliceSpritesInternal(worldStartPoint, worldEndPoint, sprite, 0, destroySlicedObjects, -1, ref slicedObjectInfo,0);
+		if(sprite)
+		{
+			LayerMask layerMask = -1;
+			SliceSpritesInternal(worldStartPoint, worldEndPoint, sprite, 0, destroySlicedObjects, -1, ref slicedObjectInfo, layerMask, null);
+		}
 	}
 
 	/// <summary>
@@ -117,9 +188,12 @@ public static class SpriteSlicer2D
 	/// <param name="slicedObjectInfo">A list of SpriteSlicer2DSliceInfo that will be fill out with details about slice locations, slcied objects, and created child objects.</param>
 	public static void SliceSprite(Vector3 worldStartPoint, Vector3 worldEndPoint, GameObject sprite, bool destroySlicedObjects, int maxCutDepth, ref List<SpriteSlicer2DSliceInfo> slicedObjectInfo)
 	{
-		SliceSpritesInternal(worldStartPoint, worldEndPoint, sprite, 0, destroySlicedObjects, maxCutDepth, ref slicedObjectInfo,0);
+		if(sprite)
+		{
+			LayerMask layerMask = -1;
+			SliceSpritesInternal(worldStartPoint, worldEndPoint, sprite, 0, destroySlicedObjects, maxCutDepth, ref slicedObjectInfo, layerMask, null);
+		}
 	}
-
 
 	/// <summary>
 	/// Explode a sprite by cutting it multiple times through the centre and then applying a force away from the center
@@ -129,15 +203,18 @@ public static class SpriteSlicer2D
 	/// <param name="explosionForce">The explosive force that will be applied to the newly created objects.</param>
 	public static void ExplodeSprite(GameObject sprite, int numCuts, float explosionForce)
 	{
-		List<SpriteSlicer2DSliceInfo> slicedObjectInfo = null;
-
-		// Need to remember our objects if we're applying forces to them
-		if(explosionForce != 0.0f)
+		if(sprite)
 		{
-			slicedObjectInfo = new List<SpriteSlicer2DSliceInfo>();
-		}
+			List<SpriteSlicer2DSliceInfo> slicedObjectInfo = null;
 
-		ExplodeSprite(sprite, numCuts, explosionForce, true, ref slicedObjectInfo);
+			// Need to remember our objects if we're applying forces to them
+			if(explosionForce != 0.0f)
+			{
+				slicedObjectInfo = new List<SpriteSlicer2DSliceInfo>();
+			}
+
+			ExplodeSprite(sprite, numCuts, explosionForce, true, ref slicedObjectInfo);
+		}
 	}
 
 	/// <summary>
@@ -150,10 +227,16 @@ public static class SpriteSlicer2D
 	/// <param name="slicedObjectInfo">A list of SpriteSlicer2DSliceInfo that will be fill out with details about slice locations, slcied objects, and created child objects.</param>
 	public static void ExplodeSprite(GameObject sprite, int numCuts, float explosionForce, bool destroySlicedObjects, ref List<SpriteSlicer2DSliceInfo> slicedObjectInfo)
 	{
+		if(!sprite)
+		{
+			return;
+		}
+
 		Bounds spriteBounds;
 		
 		if(GetSpriteBounds(sprite, out spriteBounds))
 		{
+			LayerMask layerMask = -1;
 			int parentSpriteID = sprite.GetInstanceID();
 			Vector3 centre = sprite.transform.position;
 			float maxRadius = spriteBounds.size.x + spriteBounds.size.y;
@@ -172,7 +255,7 @@ public static class SpriteSlicer2D
 				
 				Vector3 worldStartPoint = centre + angleOffset + jitterOffset;
 				Vector3 worldEndPoint = centre - angleOffset + jitterOffset;
-				SliceSpritesInternal(worldStartPoint, worldEndPoint, null, parentSpriteID, destroySlicedObjects, -1, ref slicedObjectInfo,0);
+				SliceSpritesInternal(worldStartPoint, worldEndPoint, null, parentSpriteID, destroySlicedObjects, -1, ref slicedObjectInfo, layerMask, null);
 				
 				s_SubSlicesCont.Clear();
 				
@@ -181,7 +264,7 @@ public static class SpriteSlicer2D
 				{
 					for(int j = 0; j < slicedObjectInfo[i].ChildObjects.Count; j++)
 					{
-						SliceSpritesInternal(worldStartPoint, worldEndPoint, slicedObjectInfo[i].ChildObjects[j], 0, destroySlicedObjects, -1, ref s_SubSlicesCont,0);
+						SliceSpritesInternal(worldStartPoint, worldEndPoint, slicedObjectInfo[i].ChildObjects[j], 0, destroySlicedObjects, -1, ref s_SubSlicesCont, layerMask, null);
 					}
 				}
 				
@@ -428,19 +511,37 @@ public static class SpriteSlicer2D
 	/// <param name="destroySlicedObjects">Whether to automatically destroy the parent object - if false, the calling code must be responsible</param>
 	/// <param name="maxCutDepth">Max cut depth - prevents a sprite from being subdivided too many times. Pass -1 to divide infinitely.</param>
 	/// <param name="slicedObjectInfo">A list of information regarding the sliced objects, cut locations etc.</param>
-	static void SliceSpritesInternal(Vector3 worldStartPoint, Vector3 worldEndPoint, GameObject spriteObject, int spriteInstanceID, bool destroySlicedObjects, int maxCutDepth, ref List<SpriteSlicer2DSliceInfo> slicedObjectInfo,int layerMask)
+	static void SliceSpritesInternal(Vector3 worldStartPoint, Vector3 worldEndPoint, GameObject spriteObject, int spriteInstanceID, bool destroySlicedObjects, int maxCutDepth, ref List<SpriteSlicer2DSliceInfo> slicedObjectInfo, LayerMask layerMask, string tag)
 	{
 		Vector3 direction = Vector3.Normalize(worldEndPoint - worldStartPoint);
 		float length = Vector3.Distance(worldStartPoint, worldEndPoint);
-		RaycastHit2D[] cutStartResults = Physics2D.RaycastAll(worldStartPoint, direction, length,layerMask);
-		RaycastHit2D[] cutEndResults = Physics2D.RaycastAll(worldEndPoint, -direction, length,layerMask);
+		RaycastHit2D[] cutStartResults = Physics2D.RaycastAll(worldStartPoint, direction, length, layerMask.value);
+		RaycastHit2D[] cutEndResults = Physics2D.RaycastAll(worldEndPoint, -direction, length, layerMask.value);
 
 		if(cutStartResults.Length == cutEndResults.Length)
 		{
 			for(int cutResultIndex = 0; cutResultIndex < cutStartResults.Length && cutResultIndex < cutEndResults.Length; cutResultIndex++)
 			{
 				RaycastHit2D cutEnter = cutStartResults[cutResultIndex];
-				RaycastHit2D cutExit = cutEndResults[cutEndResults.Length - 1 - cutResultIndex];
+
+				int cutExitIndex = -1;
+				
+				// Find the matching cut end point in the cut end results
+				for(int endResultIndex = 0; endResultIndex < cutEndResults.Length; endResultIndex++)
+				{
+					if(cutEndResults[endResultIndex].collider == cutEnter.collider)
+					{
+						cutExitIndex = endResultIndex;
+						break;
+					}
+				}
+				
+				if(cutExitIndex == -1)
+				{
+					continue;
+				}
+				
+				RaycastHit2D cutExit = cutEndResults[cutExitIndex];
 
 				if(cutEnter.rigidbody == cutExit.rigidbody)
 				{
@@ -457,6 +558,11 @@ public static class SpriteSlicer2D
 					}
 
 					if(spriteObject != null && cutEnter.rigidbody.gameObject != spriteObject)
+					{
+						continue;
+					}
+
+					if(tag != null && parentRigidBody.tag != tag)
 					{
 						continue;
 					}
@@ -1186,7 +1292,7 @@ public class SlicedSprite : MonoBehaviour
 		if(material == null)
 		{
 			material = new Material(unitySprite.material.shader);
-			material.SetTexture(0, unitySprite.sprite.texture);
+			material.mainTexture = unitySprite.sprite.texture;
 			material.name = unitySprite.name + "_sliced";
 			s_MaterialList.Add(material);
 		}
@@ -1211,6 +1317,9 @@ public class SlicedSprite : MonoBehaviour
 		m_HFlipped = hFlipped;
 		m_Rotated = rotated;
 		m_SpriteBounds = spriteBounds;
+
+		gameObject.tag = parentObject.tag;
+		gameObject.layer = parentObject.layer;
 		
 		Mesh spriteMesh = new Mesh();
 		spriteMesh.name = "SlicedSpriteMesh";
@@ -1269,8 +1378,8 @@ public class SlicedSprite : MonoBehaviour
 		for(int vertexIndex = 1; vertexIndex < numVertices - 1; vertexIndex++)
 		{
 			triangles[triangleIndex++] = 0;
-			triangles[triangleIndex++] = vertexIndex;
 			triangles[triangleIndex++] = vertexIndex + 1;
+			triangles[triangleIndex++] = vertexIndex;
 		}	
 		
 		spriteMesh.Clear();

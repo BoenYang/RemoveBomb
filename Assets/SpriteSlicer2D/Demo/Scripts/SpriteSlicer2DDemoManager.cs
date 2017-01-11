@@ -90,6 +90,7 @@ public class SpriteSlicer2DDemoManager : MonoBehaviour
 				for(int loop = 0; loop < m_MousePositions.Count - 1; loop++)
 				{
 					SpriteSlicer2D.SliceAllSprites(m_MousePositions[loop].m_WorldPosition, m_MousePositions[m_MousePositions.Count - 1].m_WorldPosition, true, ref m_SlicedSpriteInfo);
+
 					if(m_SlicedSpriteInfo.Count > 0)
 					{
 						// Add some force in the direction of the swipe so that stuff topples over rather than just being
