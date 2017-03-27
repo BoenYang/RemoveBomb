@@ -2,6 +2,7 @@
 
 public class UIBase : MonoBehaviour
 {
+	[System.NonSerialized]
     public string UIName;
 
     public virtual void OnInit()

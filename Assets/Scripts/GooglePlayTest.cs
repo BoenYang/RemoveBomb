@@ -1,8 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
-using GooglePlayGames;
-using GooglePlayGames.BasicApi;
-using GooglePlayGames.BasicApi.Multiplayer;
+//using GooglePlayGames;
+//using GooglePlayGames.BasicApi;
+//using GooglePlayGames.BasicApi.Multiplayer;
 
 public class GooglePlayTest : MonoBehaviour
 {
@@ -24,7 +24,7 @@ public class GooglePlayTest : MonoBehaviour
 
     public void Init()
     {
-        PlayGamesClientConfiguration config = new PlayGamesClientConfiguration.Builder()
+        /*PlayGamesClientConfiguration config = new PlayGamesClientConfiguration.Builder()
         // enables saving game progress.
         .EnableSavedGames()
 //        // registers a callback to handle game invitations received while the game is not running.
@@ -46,7 +46,7 @@ public class GooglePlayTest : MonoBehaviour
         // recommended for debugging:
         PlayGamesPlatform.DebugLogEnabled = true;
         // Activate the Google Play Games platform
-        PlayGamesPlatform.Activate();
+        PlayGamesPlatform.Activate();*/
     }
 
 

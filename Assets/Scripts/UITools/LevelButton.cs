@@ -22,6 +22,14 @@ public class LevelButton : MonoBehaviour, IPointerClickHandler{
         button = GetComponent<Button>();
     }
 
+	public void Init(){
+	
+	}
+
+	public void UpdateBtnState(int levelIndex,bool locked = true,int star = 0){
+		Level = levelIndex;
+	}
+
     private void Start()
     {
         UpdateButton();
@@ -31,7 +39,7 @@ public class LevelButton : MonoBehaviour, IPointerClickHandler{
     {
         if (Locked)
         {
-            image.sprite = LevelManager.ins.LockSprite;
+			image.sprite = Resources.Load<Sprite>("Textures/UI/level_lock");
             LevelText.text = "";
         }
         else

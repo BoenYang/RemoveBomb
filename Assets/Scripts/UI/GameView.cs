@@ -1,15 +1,11 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class GameView : MonoBehaviour {
+public class GameView : UIBase {
 
-	// Use this for initialization
-	void Start () {
-	
+	public override void OnInit ()
+	{
+		
 	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
+
 }

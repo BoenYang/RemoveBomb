@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
 {
@@ -15,9 +16,12 @@ public class UIManager : MonoBehaviour
 
     public static UIBase CurrentUIPanel;
 
+	private CanvasScaler canvasScaler;
+
     void Awake()
     {
         instance = this;
+		canvasScaler = GetComponent<CanvasScaler> ();
     }
 
     public static void OpenPanel(string uiName,bool closeBottom = false)
@@ -47,7 +51,8 @@ public class UIManager : MonoBehaviour
             panel.transform.SetParent(instance.transform);
             panel.transform.localPosition = Vector3.zero;
             panel.transform.localScale = Vector3.one;
-
+			RectTransform rtf = panel.GetComponent<RectTransform> ();
+			rtf.sizeDelta = instance.canvasScaler.referenceResolution;
             panel.OnRefresh();
 
             if (uiStack.Count > 0)

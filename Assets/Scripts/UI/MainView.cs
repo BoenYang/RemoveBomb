@@ -1,15 +1,25 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 
-public class MainView : MonoBehaviour {
+public class MainView : UIBase {
 
-	// Use this for initialization
-	void Start () {
-	
+	public Button StartBtn;
+
+	public Toggle AudioToggle;
+
+	public override void OnInit ()
+	{
+		StartBtn.onClick.AddListener (OnStartClick);
+		AudioToggle.onValueChanged.AddListener (OnAudioToggleValChange);
 	}
-	
-	// Update is called once per frame
-	void Update () {
-	
+
+	private void OnStartClick(){
+		UIManager.OpenPanel ("LevelView");
 	}
+
+	private void OnAudioToggleValChange(bool val){
+		
+	}
+
 }
