@@ -62,15 +62,15 @@ public class GameManager : MonoBehaviour {
 
     public void GameWin() {
         UIRootController.Ins.ShowUI(UIType.ResultUI,false,false);
-        if (Client.Ins.Player.PassedLevelNumber <= Level)
-        {
-            Client.Ins.Player.PassedLevelNumber++;
-        }
-        if (GotStar > Client.Ins.Player.LevelStars[Level - 1])
-        {
-            Client.Ins.Player.LevelStars[Level - 1] = GotStar;
-        }
-        Client.Ins.SavePlayerInfo();
+//        if (Client.Ins.Player.PassedLevelNumber <= Level)
+//        {
+//            Client.Ins.Player.PassedLevelNumber++;
+//        }
+//        if (GotStar > Client.Ins.Player.LevelStars[Level - 1])
+//        {
+//            Client.Ins.Player.LevelStars[Level - 1] = GotStar;
+//        }
+//        Client.Ins.SavePlayerInfo();
     }
 
     public void ClearLevel()
