@@ -2,7 +2,7 @@
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class LevelButton : MonoBehaviour, IPointerClickHandler{
+public class LevelButton : MonoBehaviour{
 
     public int Level = 1;
 
@@ -16,47 +16,14 @@ public class LevelButton : MonoBehaviour, IPointerClickHandler{
 
     private Button button;
 
-    private void Awake()
-    {
-        image = GetComponent<Image>();
-        button = GetComponent<Button>();
-    }
-
 	public void Init(){
-	
+		image = GetComponent<Image>();
+		button = GetComponent<Button>();
 	}
 
 	public void UpdateBtnState(int levelIndex,bool locked = true,int star = 0){
 		Level = levelIndex;
 	}
 
-    private void Start()
-    {
-        UpdateButton();
-    }
 
-    public void UpdateButton()
-    {
-        if (Locked)
-        {
-			image.sprite = Resources.Load<Sprite>("Textures/UI/level_lock");
-            LevelText.text = "";
-        }
-        else
-        {
-            LevelText.text = Level.ToString();
-            image.sprite = LevelManager.ins.LevelButtonSprites[Star];
-        }
-    }
-
-    public void OnPointerClick(PointerEventData eventData)
-    {
-        AudioManager.ins.PlayButtonClick();
-        if (!Locked)
-        {
-            GameManager.Ins.Level = Level;
-            UIRootController.Ins.ShowUI(UIType.GameUI,true,true);
-            GameManager.Ins.GameStart();
-        }
-    }
 }

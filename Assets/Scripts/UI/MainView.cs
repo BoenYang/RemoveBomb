@@ -15,7 +15,7 @@ public class MainView : UIBase {
 	}
 
 	private void OnStartClick(){
-		UIManager.OpenPanel ("LevelView");
+		UIManager.OpenPanel ("LevelView",true);
 	}
 
 	private void OnAudioToggleValChange(bool val){

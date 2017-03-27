@@ -34,6 +34,7 @@ public class UIManager : MonoBehaviour
             if (uiCache.ContainsKey(uiName))
             {
                 panel = uiCache[uiName];
+				uiCache.Remove (uiName);
             }
             else
             {
@@ -55,7 +56,7 @@ public class UIManager : MonoBehaviour
 			rtf.sizeDelta = instance.canvasScaler.referenceResolution;
             panel.OnRefresh();
 
-            if (uiStack.Count > 0)
+			if (uiStack.Count > 0 && closeBottom)
             {
                 UIBase lastPanel = uiStack[uiStack.Count - 1];
                 lastPanel.gameObject.SetActive(false);
@@ -105,6 +106,11 @@ public class UIManager : MonoBehaviour
 
             uiStack.Remove(uiPanel);
             uiCache.Add(uiPanel.UIName, uiPanel);
+
+			if (uiStack.Count > 0)
+			{
+				uiStack[uiStack.Count - 1].gameObject.SetActive(true);
+			}
         }
     }
 
