@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using System.Collections;
 using System.Collections.Generic;
 
 public class PlayerControl : MonoBehaviour
@@ -21,13 +20,12 @@ public class PlayerControl : MonoBehaviour
 	    if (Input.GetMouseButtonDown(0))
 	    {
 	        startPoint = Input.mousePosition;
-	        Debug.Log(startPoint);
 	    }
 
 	    if (Input.GetMouseButton(0))
 	    {
             Vector3 trailPosition = UIManager.UICamera.ScreenToWorldPoint(Input.mousePosition);
-	        trailPosition.z = -10;
+	        trailPosition.z = 1;
             Trail.gameObject.transform.position = trailPosition;
 	    }
 

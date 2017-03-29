@@ -45,6 +45,11 @@ public class UIBase : MonoBehaviour
 
     }
 
+    public virtual void ClosePanel()
+    {
+        UIManager.ClosePanel(UIName);
+    }
+
 
     protected void DispatchMsg(string msgType, UICommon.UIMsg msg)
     {
