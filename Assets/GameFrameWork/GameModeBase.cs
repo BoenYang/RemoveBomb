@@ -18,7 +18,7 @@ public abstract class GameModeBase{
 
     public virtual void StartGame()
     {
-
+        UIManager.OpenPanel("GameView",true);
     }
 
     public virtual IEnumerator GameLoop()

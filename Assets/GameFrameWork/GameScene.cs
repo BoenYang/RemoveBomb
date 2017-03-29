@@ -12,10 +12,15 @@ public class GameScene : MonoBehaviour
     void Awake()
     {
         Instance = this;
+        Game = GameModeBase.CreateGameMode(GameMode);
+        Game.Init();
+        Game.OnEnterScene();
     }
 
     void Start()
     {
-
+        Game.StartGame();
+        StartCoroutine(Game.GameLoop());
     }
+
 }
