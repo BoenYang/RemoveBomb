@@ -19,7 +19,6 @@ public class GameScene : MonoBehaviour
     void Start()
     {
         Game.StartGame();
-        StartCoroutine(Game.GameLoop());
     }
 
 }

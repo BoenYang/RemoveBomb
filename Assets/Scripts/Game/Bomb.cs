@@ -9,9 +9,9 @@ public class Bomb : MonoBehaviour
     {
         if (c.collider.tag == "Hero")
         {
-            Debug.Log("Hero collision");
-            Instantiate(DestroyEffect, transform.position, Quaternion.identity);
+			GameObject destroyGo = Instantiate(DestroyEffect, transform.position, Quaternion.identity) as GameObject;
             Destroy(gameObject);
+			Destroy (destroyGo, 2.0f);
         }
     }
 }

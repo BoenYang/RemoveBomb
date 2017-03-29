@@ -12,7 +12,7 @@ public class PlayerControl : MonoBehaviour
 
 	void Update () {
 
-	    if (!GameScene.Instance.Game.GameRunning)
+		if (!GameScene.Instance.Game.GameRunning || GameScene.Instance.Game.GamePaused)
 	    {
             return;
         }

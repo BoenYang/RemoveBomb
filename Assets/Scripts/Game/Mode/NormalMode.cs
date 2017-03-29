@@ -1,4 +1,4 @@
-﻿
+﻿using System.Collections;
 using UnityEngine;
 
 public class NormalMode : GameModeBase
@@ -21,33 +21,27 @@ public class NormalMode : GameModeBase
 
     public override void StartGame()
     {
-        GameRunning = true;
-        LoadLevel();
-    }
-
-    public override void PauseGame()
-    {
-        GameRunning = false;
-        Time.timeScale = 0;
-    }
-
-    public override void ResumeGame()
-    {
-        GameRunning = true;
-        Time.timeScale = 1.0f;
+		LoadLevel();
+		base.StartGame ();
     }
 
     public override void RestartGame()
     {
-        Time.timeScale = 1.0f;
         ClearLevel();
         StartGame();
     }
 
     public override void GameOver()
     {
-        Time.timeScale = 1.0f;
+		base.GameOver ();
+		ClearLevel ();
     }
+
+	public override void GameResult ()
+	{
+		base.GameResult ();
+		UIManager.OpenPanel ("ResultView");
+	}
 
     private void LoadLevel()
     {
@@ -69,4 +63,22 @@ public class NormalMode : GameModeBase
         GameObject.Destroy(levelGo);
         GameObject.Destroy(mapGo);
     }
+
+	protected override IEnumerator GameLoop ()
+	{
+		while (GameRunning) {
+			GameObject[] bombs = GameObject.FindGameObjectsWithTag("Bomb");
+			if (bombs == null || bombs.Length == 0)
+			{
+				GameRunning = false;
+				StartCoroutine(GameWinDelay(1F));
+			}
+			yield return new WaitForEndOfFrame ();
+		}
+	}
+
+	private IEnumerator GameWinDelay(float s){
+		yield return new WaitForSeconds(s);
+		GameResult ();
+	}
 }

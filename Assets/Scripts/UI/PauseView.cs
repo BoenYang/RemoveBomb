@@ -30,13 +30,14 @@ public class PauseView : UIBase
     private void OnBackToLevelClick()
     {
         GameScene.Instance.Game.GameOver();
+		UIManager.ClosePanel ("GameView");
         ClosePanel();
         SceneManager.LoadScene("MainScene");
     }
 
     private void OnContinueClick()
     {
-        GameScene.Instance.Game.PauseGame();
+		GameScene.Instance.Game.ResumeGame();
         ClosePanel();
     }
 
