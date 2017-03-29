@@ -33,21 +33,27 @@ public class LevelView : UIBase {
 			int col = i % 4;
 			int row = i / 4;
 			row = row%4;
+		    int packageIndex = i/16;
 
 			GameObject levelGo = Instantiate (levelBtnObj);
 			levelGo.name = "Level" + i;
 			levelGo.transform.SetParent (LevelItemRoot);
-			levelGo.transform.localPosition = startPos + new Vector3(col * HorizontalSpacing, - row * VerticalSpacing);
+			levelGo.transform.localPosition = startPos + new Vector3(col * HorizontalSpacing + packageIndex * 720, - row * VerticalSpacing);
 			levelGo.transform.localScale = Vector3.one;
 
 			LevelButton level = levelGo.GetComponent<LevelButton>();
-			level.Init ();		
-		}
+			level.Init ();
+            LevelBtns.Add(level);
+
+        }
 	}
 
 	public override void OnRefresh ()
 	{
-		
+	    for (int i = 0; i < LevelBtns.Count; i++)
+	    {
+	        LevelBtns[i].UpdateBtnState(i+1);
+	    }
 	}
 
 	private void OnBackClick(){

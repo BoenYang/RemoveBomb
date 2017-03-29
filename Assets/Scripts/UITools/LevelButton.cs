@@ -1,14 +1,9 @@
 ﻿using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class LevelButton : MonoBehaviour{
-
-    public int Level = 1;
-
-    public int Star;
-
-    public bool Locked;
 
     public Text LevelText;
 
@@ -19,11 +14,26 @@ public class LevelButton : MonoBehaviour{
 	public void Init(){
 		image = GetComponent<Image>();
 		button = GetComponent<Button>();
+        button.onClick.AddListener(OnBtnClick);
+    }
+
+	public void UpdateBtnState(int levelIndex,bool locked = true,int star = 0)
+	{
+	    if (locked)
+	    {
+	        image.sprite = Resources.Load<Sprite>("Textures/UI/level_lock");
+	        LevelText.text = "";
+	    }
+	    else
+	    {
+            image.sprite = Resources.Load<Sprite>("Textures/UI/level_star" + star);
+            LevelText.text = levelIndex.ToString();
+        }
 	}
 
-	public void UpdateBtnState(int levelIndex,bool locked = true,int star = 0){
-		Level = levelIndex;
-	}
-
+    private void OnBtnClick()
+    {
+        SceneManager.LoadScene("GameScene");
+    }
 
 }

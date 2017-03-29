@@ -16,12 +16,21 @@ public class UIManager : MonoBehaviour
 
     public static UIBase CurrentUIPanel;
 
+    public static Canvas UICanvas;
+
 	private CanvasScaler canvasScaler;
 
     void Awake()
     {
         instance = this;
 		canvasScaler = GetComponent<CanvasScaler> ();
+        UICanvas = GetComponent<Canvas>();
+        GameObject camera = GameObject.Find("UICamera");
+        GameObject eventSystem = GameObject.Find("EventSystem");
+
+        DontDestroyOnLoad(camera);
+        DontDestroyOnLoad(eventSystem);
+        DontDestroyOnLoad(gameObject);
     }
 
     public static void OpenPanel(string uiName,bool closeBottom = false)
