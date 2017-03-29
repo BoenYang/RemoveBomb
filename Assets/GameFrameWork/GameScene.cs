@@ -2,7 +2,6 @@
 
 public class GameScene : MonoBehaviour
 {
-
     public string GameMode = "Normal";
 
     public GameModeBase Game;

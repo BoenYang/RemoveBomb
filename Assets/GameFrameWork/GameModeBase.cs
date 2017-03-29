@@ -2,7 +2,10 @@
 using System.Collections;
 using UnityEngine;
 
-public abstract class GameModeBase{
+public abstract class GameModeBase
+{
+
+    public bool GameRunning = false;
 
     public abstract string Mode { get; }
 
@@ -18,7 +21,6 @@ public abstract class GameModeBase{
 
     public virtual void StartGame()
     {
-        UIManager.OpenPanel("GameView",true);
     }
 
     public virtual IEnumerator GameLoop()

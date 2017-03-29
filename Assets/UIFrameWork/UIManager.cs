@@ -16,6 +16,8 @@ public class UIManager : MonoBehaviour
 
     public static UIBase CurrentUIPanel;
 
+    public static Camera UICamera;
+
     public static Canvas UICanvas;
 
 	private CanvasScaler canvasScaler;
@@ -27,6 +29,8 @@ public class UIManager : MonoBehaviour
         UICanvas = GetComponent<Canvas>();
         GameObject camera = GameObject.Find("UICamera");
         GameObject eventSystem = GameObject.Find("EventSystem");
+
+        UICamera = camera.GetComponent<Camera>();
 
         DontDestroyOnLoad(camera);
         DontDestroyOnLoad(eventSystem);
