@@ -2,8 +2,18 @@
 using UnityEngine;
 using UnityEngine.UI;
 
+/// <summary>
+/// UI管理提，负责UI的关闭，打开相关调度
+/// </summary>
 public class UIManager : MonoBehaviour
 {
+
+    public static UIBase CurrentUIPanel;
+
+    public static Camera UICamera;
+
+    public static Canvas UICanvas;
+
     private static List<UIBase> uiStack = new List<UIBase>();
 
     private static UILoader loader = new UILoader();
@@ -14,13 +24,7 @@ public class UIManager : MonoBehaviour
 
     private static UIManager instance;
 
-    public static UIBase CurrentUIPanel;
-
-    public static Camera UICamera;
-
-    public static Canvas UICanvas;
-
-	private CanvasScaler canvasScaler;
+	private static CanvasScaler canvasScaler;
 
     void Awake()
     {

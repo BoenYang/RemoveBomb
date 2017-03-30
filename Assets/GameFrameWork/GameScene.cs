@@ -1,5 +1,8 @@
 ﻿using UnityEngine;
 
+/// <summary>
+/// 游戏场景的第一个运行的脚本，用来作为启动游戏逻辑的第一个脚本
+/// </summary>
 public class GameScene : MonoBehaviour
 {
     public string GameMode = "Normal";
@@ -13,7 +16,6 @@ public class GameScene : MonoBehaviour
         Instance = this;
         Game = GameModeBase.CreateGameMode(GameMode);
         Game.Init();
-        Game.OnEnterScene();
     }
 
     void Start()

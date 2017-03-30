@@ -38,27 +38,27 @@ public class NormalMode : GameModeBase
 
     public override void GameOver()
     {
-        GameRunning = false;
+        base.GameOver();
         Time.timeScale = 1.0f;
         ClearLevel ();
     }
 
 	public override void GameResult ()
 	{
-        GameRunning = false;
+        base.GameResult();
         Time.timeScale = 1.0f;
         UIManager.OpenPanel ("ResultView");
 	}
 
     public override void PauseGame()
     {
-        GamePaused = true;
+        base.PauseGame();
         Time.timeScale = 0.0f;
     }
 
     public override void ResumeGame()
     {
-        GamePaused = false;
+        base.ResumeGame();
         Time.timeScale = 1.0f;
     }
 
