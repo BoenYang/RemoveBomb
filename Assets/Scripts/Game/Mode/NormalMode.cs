@@ -7,9 +7,10 @@ public class NormalMode : GameModeBase
     {
         get { return "Normal"; }
     }
+
     public int StarCount;
 
-    private int LevelIndex = 1;
+    private int currentLevelIndex;
 
     private GameObject levelGo;
 
@@ -23,9 +24,13 @@ public class NormalMode : GameModeBase
     public override void StartGame()
     {
         base.StartGame();
-        LoadLevel();
+
         StarCount = 0;
+        currentLevelIndex = PlayerInfo.CurrentPlayer.SelectedLevelIndex;
+
         Time.timeScale = 1.0f;
+
+        LoadLevel();
         UIManager.DispatchMsg("ResetGame");
         StartCoroutine(GameLoop());
     }
@@ -47,7 +52,7 @@ public class NormalMode : GameModeBase
 	{
         base.GameResult();
         Time.timeScale = 1.0f;
-        UIManager.OpenPanel ("ResultView");
+        UIManager.OpenPanel ("ResultView",false,StarCount);
 	}
 
     public override void PauseGame()
@@ -68,11 +73,16 @@ public class NormalMode : GameModeBase
         UIManager.DispatchMsg("GetStar");
     }
 
+    public void NextLevel()
+    {
+        currentLevelIndex++;
+    }
+
     private void LoadLevel()
     {
-        int package = LevelIndex / 16 + 1;
+        int package = currentLevelIndex / 16 + 1;
 
-        GameObject levelObj = Resources.Load<GameObject>("level/Level" + LevelIndex);
+        GameObject levelObj = Resources.Load<GameObject>("level/Level" + currentLevelIndex);
         levelGo = GameObject.Instantiate(levelObj);
         levelGo.transform.localPosition = new Vector3(0, 0, 1);
         levelGo.transform.localScale = Vector3.one;
@@ -96,6 +106,7 @@ public class NormalMode : GameModeBase
 			if (bombs == null || bombs.Length == 0)
 			{
 				GameRunning = false;
+                PlayerInfo.CurrentPlayer.PassLevel(currentLevelIndex,StarCount);
 				StartCoroutine(GameWinDelay(1F));
 			}
 			yield return new WaitForEndOfFrame ();

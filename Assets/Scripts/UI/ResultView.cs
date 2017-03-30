@@ -2,6 +2,7 @@
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using System.Collections;
+using System.Collections.Generic;
 
 public class ResultView : UIBase {
 
@@ -11,6 +12,12 @@ public class ResultView : UIBase {
 
 	public Button Restart;
 
+    public List<ResultStar> StarList; 
+
+    private int starCount;
+
+    private bool isAnimating;
+
 	public override void OnInit ()
 	{
 		BackToLevelView.onClick.AddListener (OnBackClick);
@@ -18,19 +25,57 @@ public class ResultView : UIBase {
 		Restart.onClick.AddListener (OnRestartClick);
 	}
 
-	private void OnBackClick(){
-		GameScene.Instance.Game.GameOver ();
+    public override void OnRefresh()
+    {
+        starCount = (int)Args[0];
+        StarList.ForEach((s) => s.HideStar());
+        StartCoroutine(ShowStarEffect());
+    }
+
+    private IEnumerator ShowStarEffect()
+    {
+        isAnimating = true;
+        for (int i = 0; i < starCount; i++)
+        {
+            StarList[i].ShowStar();
+            yield return new WaitForSeconds(0.5f);
+        }
+        isAnimating = false;
+    }
+
+    private void OnBackClick(){
+
+        if (isAnimating)
+        {
+            return;
+        }
+
+        GameScene.Instance.Game.GameOver ();
 		UIManager.ClosePanel ("GameView");
 		ClosePanel ();
 		SceneManager.LoadScene("MainScene");
 	}
 
-	private void OnNextLevelClick(){
-	
+	private void OnNextLevelClick()
+    {
+        if (isAnimating)
+        {
+            return;
+        }
+
+        ClosePanel();
+        GameScene.Instance.GetGameMode<NormalMode>().NextLevel();
+        GameScene.Instance.Game.RestartGame();
 	}
 
 	private void OnRestartClick(){
-		ClosePanel ();
+
+        if (isAnimating)
+        {
+            return;
+        }
+
+        ClosePanel ();
 		GameScene.Instance.Game.RestartGame ();
 	}
 

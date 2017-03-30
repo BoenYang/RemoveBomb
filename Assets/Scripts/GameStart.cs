@@ -3,8 +3,8 @@ using System.Collections;
 
 public class GameStart : MonoBehaviour {
 
-	// Use this for initialization
 	void Start () {
+        PlayerInfo.ReadPlayerInfo();
 		UIManager.OpenPanel ("MainView");
 	}
 	

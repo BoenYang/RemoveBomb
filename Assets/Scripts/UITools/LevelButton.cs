@@ -11,14 +11,19 @@ public class LevelButton : MonoBehaviour{
 
     private Button button;
 
+    private int levelIndex;
+
 	public void Init(){
 		image = GetComponent<Image>();
 		button = GetComponent<Button>();
         button.onClick.AddListener(OnBtnClick);
     }
 
-	public void UpdateBtnState(int levelIndex,bool locked = true,int star = 0)
+	public void UpdateBtnState(int levelIndex)
 	{
+	    this.levelIndex = levelIndex;
+	    bool locked = levelIndex > PlayerInfo.CurrentPlayer.CurrentLevelIndex;
+	    int star = PlayerInfo.CurrentPlayer.LevelStars[levelIndex - 1];
 	    if (locked)
 	    {
 	        image.sprite = Resources.Load<Sprite>("Textures/UI/level_lock");
@@ -33,6 +38,7 @@ public class LevelButton : MonoBehaviour{
 
     private void OnBtnClick()
     {
+        PlayerInfo.CurrentPlayer.SelectedLevelIndex = levelIndex;
         SceneManager.LoadScene("GameScene");
     }
 
