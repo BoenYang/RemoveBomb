@@ -29,6 +29,7 @@ public class PauseView : UIBase
 
     private void OnBackToLevelClick()
     {
+        GlobalMng.GlobalSingleton<AudioMng>().PlaySound(MusicPath.Click);
         GameScene.Instance.Game.GameOver();
 		UIManager.ClosePanel ("GameView");
         ClosePanel();
@@ -37,12 +38,14 @@ public class PauseView : UIBase
 
     private void OnContinueClick()
     {
-		GameScene.Instance.Game.ResumeGame();
+        GlobalMng.GlobalSingleton<AudioMng>().PlaySound(MusicPath.Click);
+        GameScene.Instance.Game.ResumeGame();
         ClosePanel();
     }
 
     private void OnRestartClick()
     {
+        GlobalMng.GlobalSingleton<AudioMng>().PlaySound(MusicPath.Click);
         ClosePanel();
         GameScene.Instance.Game.RestartGame();
     }

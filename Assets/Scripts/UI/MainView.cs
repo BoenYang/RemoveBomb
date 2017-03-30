@@ -14,8 +14,14 @@ public class MainView : UIBase {
 		AudioToggle.onValueChanged.AddListener (OnAudioToggleValChange);
 	}
 
-	private void OnStartClick(){
-		UIManager.OpenPanel ("LevelView",true);
+    public override void OnRefresh()
+    {
+        GlobalMng.GlobalSingleton<AudioMng>().PlayMusic(MusicPath.Background);
+    }
+
+    private void OnStartClick(){
+        GlobalMng.GlobalSingleton<AudioMng>().PlaySound(MusicPath.Click);
+        UIManager.OpenPanel ("LevelView",true);
 	}
 
 	private void OnAudioToggleValChange(bool val){

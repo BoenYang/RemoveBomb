@@ -32,23 +32,29 @@ public class GameView : UIBase
 
     private void OnPauseClick()
     {
+     
         if (GameScene.Instance.Game.GameRunning)
         {
+            GlobalMng.GlobalSingleton<AudioMng>().PlaySound(MusicPath.Click);
             UIManager.OpenPanel("PauseView");
         }
     }
 
     private void OnRestartBtnClick()
     {
+       
         if (GameScene.Instance.Game.GameRunning)
         {
+            GlobalMng.GlobalSingleton<AudioMng>().PlaySound(MusicPath.Click);
             GameScene.Instance.Game.RestartGame();
         }
     }
 
     private void OnGetStar(UIMsg msg)
     {
+
         int startCount = GameScene.Instance.GetGameMode<NormalMode>().StarCount;
+        GlobalMng.GlobalSingleton<AudioMng>().PlaySound(MusicPath.CatchStar + startCount);
         StarList[startCount - 1].ShowStar();
     }
 

@@ -57,6 +57,7 @@ public class LevelView : UIBase {
 	}
 
 	private void OnBackClick(){
-		UIManager.CloseTop ();
+        GlobalMng.GlobalSingleton<AudioMng>().PlaySound(MusicPath.Click);
+        UIManager.CloseTop ();
 	}
 }
