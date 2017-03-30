@@ -19,7 +19,6 @@ public class PlayerInfo
         playerInfo.CurrentLevelIndex = PlayerPrefs.GetInt("CurrentLevelIndex", 1);
         string starStr = PlayerPrefs.GetString("LevelStars", "");
         playerInfo.LevelStars = new int[32];
-        Debug.Log(playerInfo.CurrentLevelIndex);
         Array.Clear(playerInfo.LevelStars, 0, playerInfo.LevelStars.Length);
         if (!string.IsNullOrEmpty(starStr))
         {
@@ -36,6 +35,7 @@ public class PlayerInfo
 
     public void PassLevel(int levelIndex,int star)
     {
+		Debug.Log (levelIndex + " " + star);
         if (LevelStars[levelIndex - 1] < star)
         {
             LevelStars[levelIndex - 1] = star;

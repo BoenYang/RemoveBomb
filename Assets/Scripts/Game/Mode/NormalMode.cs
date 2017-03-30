@@ -19,19 +19,17 @@ public class NormalMode : GameModeBase
     public override void Init()
     {
         UIManager.OpenPanel("GameView", true);
+		currentLevelIndex = PlayerInfo.CurrentPlayer.SelectedLevelIndex;
     }
 
     public override void StartGame()
     {
         base.StartGame();
+		Time.timeScale = 1.0f;
+		UIManager.DispatchMsg("ResetGame");
 
         StarCount = 0;
-        currentLevelIndex = PlayerInfo.CurrentPlayer.SelectedLevelIndex;
-
-        Time.timeScale = 1.0f;
-
         LoadLevel();
-        UIManager.DispatchMsg("ResetGame");
         StartCoroutine(GameLoop());
     }
 
