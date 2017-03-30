@@ -50,6 +50,7 @@ public class LevelView : UIBase {
 
 	public override void OnRefresh ()
 	{
+		GlobalMng.GlobalSingleton<AudioMng> ().PlayMusic (MusicPath.Background);
 	    for (int i = 0; i < LevelBtns.Count; i++)
 	    {
 	        LevelBtns[i].UpdateBtnState(i+1);

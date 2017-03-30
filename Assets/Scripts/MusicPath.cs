@@ -10,4 +10,6 @@ public class MusicPath
     public static readonly string Success = "Audio/Success";
 
     public static readonly string CatchStar = "Audio/catch_star";
+
+	public static readonly string Game = "Audio/game";
 }

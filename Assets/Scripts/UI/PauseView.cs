@@ -1,4 +1,4 @@
-﻿
+﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
@@ -14,11 +14,16 @@ public class PauseView : UIBase
 
     public Toggle SoundToggle;
 
+	private bool musicOn;
+
     public override void OnInit()
     {
         BackToLevelBtn.onClick.AddListener(OnBackToLevelClick);
         ContinueBtn.onClick.AddListener(OnContinueClick);
         RestartBtn.onClick.AddListener(OnRestartClick);
+
+		SoundToggle.onValueChanged.AddListener (OnAudioToggleValChange);
+
     }
 
 
@@ -29,6 +34,8 @@ public class PauseView : UIBase
 
     private void OnBackToLevelClick()
     {
+		musicOn = PlayerPrefs.GetInt ("MusicOn",1) == 1;
+		SoundToggle.isOn = !musicOn;
         GlobalMng.GlobalSingleton<AudioMng>().PlaySound(MusicPath.Click);
         GameScene.Instance.Game.GameOver();
 		UIManager.ClosePanel ("GameView");
@@ -49,4 +56,11 @@ public class PauseView : UIBase
         ClosePanel();
         GameScene.Instance.Game.RestartGame();
     }
+
+	private void OnAudioToggleValChange(bool val){
+		GlobalMng.GlobalSingleton<AudioMng> ().MusicOn = !val;
+		GlobalMng.GlobalSingleton<AudioMng> ().SoundOn = !val;
+		musicOn = !val;
+		PlayerPrefs.SetInt ("MusicOn", !val ? 1 : 0);
+	}
 }

@@ -23,6 +23,7 @@ public class GameView : UIBase
 
     public override void OnRefresh()
     {
+		GlobalMng.GlobalSingleton<AudioMng> ().PlayMusic (MusicPath.Game);
         for (int i = 0; i < StarList.Count; i++)
         {
             StarList[i].HideStar();

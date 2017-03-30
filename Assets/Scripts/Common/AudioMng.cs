@@ -8,7 +8,6 @@ public class AudioMng : MonoBehaviour
 {
     private Dictionary<string,AudioClip> audioCache = new Dictionary<string, AudioClip>();
 
-
     public AudioSource AudioSource;
 
     private string currentMusicName = "";
@@ -34,6 +33,13 @@ public class AudioMng : MonoBehaviour
     }
 
     private bool _musicOn = true;
+
+	public bool SoundOn{
+		get{ return _soundOn;}
+		set{ _soundOn = value;}
+	}
+
+	private bool _soundOn;
 
     void Awake()
     {
@@ -80,7 +86,7 @@ public class AudioMng : MonoBehaviour
 
     public void PlaySound(string soundPath,float volume = 0.5f)
     {
-        if (!_musicOn)
+		if (!_soundOn)
         {
             return;
         }
