@@ -25,8 +25,6 @@ public abstract class GameModeBase
     {
 		GameRunning = true;
 		GamePaused = false;
-		Time.timeScale = 1.0f;
-		StartCoroutine (GameLoop ());
     }
 
 	protected virtual IEnumerator GameLoop()
@@ -36,26 +34,22 @@ public abstract class GameModeBase
 
     public virtual void GameOver()
     {
-		GameRunning = false;
-		Time.timeScale = 1.0f;
+		
     }
 
     public virtual void GameResult()
     {
-		GameRunning = false;
-		Time.timeScale = 1.0f;
+		
     }
 
     public virtual void PauseGame()
     {
-		GamePaused = true;
-		Time.timeScale = 0.0f;
+	
     }
 
     public virtual void ResumeGame()
     {
-		GamePaused = false;
-		Time.timeScale = 1.0f;
+		
     }
 
     public virtual void RestartGame()

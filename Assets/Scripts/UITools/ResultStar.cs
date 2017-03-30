@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using System.Collections;
 using UnityEngine.UI;
 
 public class ResultStar : MonoBehaviour
@@ -18,6 +17,7 @@ public class ResultStar : MonoBehaviour
             go.transform.parent = gameObject.transform;
             go.transform.localScale = Vector3.one;
             go.transform.localPosition = Vector3.zero;
+            Destroy(go,1.0f);
         }
         StarImage.gameObject.SetActive(true);
     }

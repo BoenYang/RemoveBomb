@@ -8,7 +8,7 @@ public class UIManager : MonoBehaviour
 
     private static UILoader loader = new UILoader();
 
-    private static Dictionary<string,List<UICommon.UIMsgCallback>> uiMsgDict = new Dictionary<string, List<UICommon.UIMsgCallback>>(); 
+    private static Dictionary<string,List<UIMsgCallback>> uiMsgDict = new Dictionary<string, List<UIMsgCallback>>(); 
 
     private static Dictionary<string,UIBase> uiCache = new Dictionary<string, UIBase>(); 
 
@@ -66,7 +66,10 @@ public class UIManager : MonoBehaviour
             panel.transform.localPosition = Vector3.zero;
             panel.transform.localScale = Vector3.one;
 			RectTransform rtf = panel.GetComponent<RectTransform> ();
-			rtf.sizeDelta = instance.canvasScaler.referenceResolution;
+            rtf.anchorMax = new Vector2(1,1);
+            rtf.anchorMin = new Vector2(0, 0);
+            rtf.offsetMax = new Vector2(0,0);
+            rtf.offsetMin = new Vector2(0, 0);
             panel.OnRefresh();
 
 			if (uiStack.Count > 0 && closeBottom)
@@ -127,12 +130,33 @@ public class UIManager : MonoBehaviour
         }
     }
 
-    public static void DispatchMsg(string msgType,UICommon.UIMsg msg)
+    public static void DispatchMsg(string msgType,UIMsg msg = null)
     {
+        UIMsg m = msg;
+        if (msg == null)
+        {
+            m = new UIMsg();
+        }
 
+        if (uiMsgDict.ContainsKey(msgType))
+        {
+            List<UIMsgCallback> listenerList = uiMsgDict[msgType];
+            for (int i = 0; i < listenerList.Count; i++)
+            {
+                UIMsgCallback listener = listenerList[i];
+                if (listener.Method.IsStatic)
+                {
+                    listener.Invoke(m);
+                }
+                else if(listener.Target != null)
+                {
+                    listener.Invoke(m);
+                }
+            }
+        }
     }
 
-    public static void AddListener(string msgType,UICommon.UIMsgCallback callback)
+    public static void AddListener(string msgType,UIMsgCallback callback)
     {
         if (uiMsgDict.ContainsKey(msgType))
         {
@@ -150,7 +174,7 @@ public class UIManager : MonoBehaviour
         }
         else
         {
-            uiMsgDict.Add(msgType,new List<UICommon.UIMsgCallback>());
+            uiMsgDict.Add(msgType,new List<UIMsgCallback>());
             uiMsgDict[msgType].Add(callback);
         }
     }

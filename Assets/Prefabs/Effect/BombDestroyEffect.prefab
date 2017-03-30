@@ -10,7 +10,7 @@ GameObject:
   - 4: {fileID: 420090}
   - 198: {fileID: 19859858}
   - 199: {fileID: 19905394}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: BombDestroyEffect
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1791,8 +1791,8 @@ ParticleSystemRenderer:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 143148}
   m_Enabled: 1
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -1811,8 +1811,8 @@ ParticleSystemRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingLayerID: -1868247583
+  m_SortingOrder: 1
   m_RenderMode: 0
   m_SortMode: 0
   m_MinParticleSize: 0

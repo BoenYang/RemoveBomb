@@ -51,13 +51,13 @@ public class UIBase : MonoBehaviour
     }
 
 
-    protected void DispatchMsg(string msgType, UICommon.UIMsg msg)
+    protected void DispatchMsg(string msgType, UIMsg msg = null)
     {
-
+        UIManager.DispatchMsg(msgType,msg);
     }
 
-    protected void AddMsgListener(string msgType)
+    protected void AddMsgListener(string msgType,UIMsgCallback callBack)
     {
-
+        UIManager.AddListener(msgType,callBack);
     }
 }

@@ -21,4 +21,8 @@ public class GameScene : MonoBehaviour
         Game.StartGame();
     }
 
+    public T GetGameMode<T>() where T : GameModeBase
+    {
+        return Game as T;
+    }
 }

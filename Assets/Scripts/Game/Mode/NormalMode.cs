@@ -7,6 +7,7 @@ public class NormalMode : GameModeBase
     {
         get { return "Normal"; }
     }
+    public int StarCount;
 
     private int LevelIndex = 1;
 
@@ -21,8 +22,12 @@ public class NormalMode : GameModeBase
 
     public override void StartGame()
     {
-		LoadLevel();
-		base.StartGame ();
+        base.StartGame();
+        LoadLevel();
+        StarCount = 0;
+        Time.timeScale = 1.0f;
+        UIManager.DispatchMsg("ResetGame");
+        StartCoroutine(GameLoop());
     }
 
     public override void RestartGame()
@@ -33,15 +38,35 @@ public class NormalMode : GameModeBase
 
     public override void GameOver()
     {
-		base.GameOver ();
-		ClearLevel ();
+        GameRunning = false;
+        Time.timeScale = 1.0f;
+        ClearLevel ();
     }
 
 	public override void GameResult ()
 	{
-		base.GameResult ();
-		UIManager.OpenPanel ("ResultView");
+        GameRunning = false;
+        Time.timeScale = 1.0f;
+        UIManager.OpenPanel ("ResultView");
 	}
+
+    public override void PauseGame()
+    {
+        GamePaused = true;
+        Time.timeScale = 0.0f;
+    }
+
+    public override void ResumeGame()
+    {
+        GamePaused = false;
+        Time.timeScale = 1.0f;
+    }
+
+    public void GetStar()
+    {
+        StarCount++;
+        UIManager.DispatchMsg("GetStar");
+    }
 
     private void LoadLevel()
     {

@@ -168,7 +168,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0fb1ae2067885e544b4c2d38dbfa150b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ShowEffect: {fileID: 0}
+  ShowEffect: {fileID: 138704, guid: e15e4811bdb311c4998550a9258384a6, type: 2}
   StarImage: {fileID: 11416578}
 --- !u!114 &11410812
 MonoBehaviour:
@@ -276,7 +276,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0fb1ae2067885e544b4c2d38dbfa150b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ShowEffect: {fileID: 0}
+  ShowEffect: {fileID: 138704, guid: e15e4811bdb311c4998550a9258384a6, type: 2}
   StarImage: {fileID: 11482728}
 --- !u!114 &11437726
 MonoBehaviour:
@@ -343,7 +343,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0fb1ae2067885e544b4c2d38dbfa150b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ShowEffect: {fileID: 0}
+  ShowEffect: {fileID: 138704, guid: e15e4811bdb311c4998550a9258384a6, type: 2}
   StarImage: {fileID: 11449014}
 --- !u!114 &11443146
 MonoBehaviour:
@@ -736,3 +736,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PauseBtn: {fileID: 11443146}
   RestartBtn: {fileID: 11410812}
+  StarList:
+  - {fileID: 11426562}
+  - {fileID: 11439072}
+  - {fileID: 11404820}
