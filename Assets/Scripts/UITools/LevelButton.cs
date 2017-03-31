@@ -13,6 +13,8 @@ public class LevelButton : MonoBehaviour{
 
     private int levelIndex;
 
+    private bool locked;
+
 	public void Init(){
 		image = GetComponent<Image>();
 		button = GetComponent<Button>();
@@ -22,7 +24,7 @@ public class LevelButton : MonoBehaviour{
 	public void UpdateBtnState(int levelIndex)
 	{
 	    this.levelIndex = levelIndex;
-	    bool locked = levelIndex > PlayerInfo.CurrentPlayer.CurrentLevelIndex;
+	    locked = levelIndex > PlayerInfo.CurrentPlayer.CurrentLevelIndex;
 	    int star = PlayerInfo.CurrentPlayer.LevelStars[levelIndex - 1];
 	    if (locked)
 	    {
@@ -39,8 +41,11 @@ public class LevelButton : MonoBehaviour{
     private void OnBtnClick()
     {
         GlobalMng.GlobalSingleton<AudioMng>().PlaySound(MusicPath.Click);
-        PlayerInfo.CurrentPlayer.SelectedLevelIndex = levelIndex;
-        SceneManager.LoadScene("GameScene");
+        if (!locked)
+        {
+            PlayerInfo.CurrentPlayer.SelectedLevelIndex = levelIndex;
+            SceneManager.LoadScene("GameScene");
+        }
     }
 
 }
