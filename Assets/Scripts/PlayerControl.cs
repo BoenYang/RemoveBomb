@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
+using UnityEngine.Assertions.Comparers;
 
 public class PlayerControl : MonoBehaviour
 {
@@ -20,6 +21,7 @@ public class PlayerControl : MonoBehaviour
 	    if (Input.GetMouseButtonDown(0))
 	    {
 	        startPoint = Input.mousePosition;
+            //Trail.Clear();
 	    }
 
 	    if (Input.GetMouseButton(0))
@@ -40,7 +42,35 @@ public class PlayerControl : MonoBehaviour
 	        {
 	            for (int j = 0; j < spriteSlicer2DSliceInfos[i].ChildObjects.Count; j++)
 	            {
-	                spriteSlicer2DSliceInfos[i].ChildObjects[j].layer = 8;
+	                SpriteSlicer2DSliceInfo sliceInfo = spriteSlicer2DSliceInfos[i];
+	                GameObject childObject = sliceInfo.ChildObjects[j];
+	                Rigidbody2D childRigidBody = childObject.GetComponent<Rigidbody2D>();
+                    Vector2 childPos = new Vector2(childRigidBody.worldCenterOfMass.x,childRigidBody.worldCenterOfMass.y);
+
+                    Vector2 cutLineMidPos = (sliceInfo.SliceEnterWorldPosition - sliceInfo.SliceExitWorldPosition)/2f;
+	                Vector2 cutLineDir = (sliceInfo.SliceExitWorldPosition - sliceInfo.SliceEnterWorldPosition).normalized;
+
+	                float dir = (childPos.y - sliceInfo.SliceExitWorldPosition.y)*
+	                            (sliceInfo.SliceEnterWorldPosition.x - sliceInfo.SliceExitWorldPosition.x) -
+	                            (sliceInfo.SliceEnterWorldPosition.y - sliceInfo.SliceExitWorldPosition.y)*
+	                            (childPos.x - sliceInfo.SliceExitWorldPosition.x);
+                    
+	                float angle = Vector2.Angle(cutLineDir, Vector2.right);
+
+	                if (dir > 0)
+	                {
+	                    angle = angle + 90;
+	                }
+	                else
+	                {
+	                    angle = angle - 90;
+	                }
+
+                    Vector2 normal = new Vector2(Mathf.Cos(angle*Mathf.Deg2Rad),Mathf.Sin(angle*Mathf.Deg2Rad));
+
+                    //childRigidBody.AddForceAtPosition(childRigidBody.mass * normal * 0.5f ,cutLineMidPos,ForceMode2D.Impulse);
+
+                    childObject.layer = 8;
 	            }
 	        }
 	    }

@@ -40,7 +40,7 @@ public class LevelView : UIBase {
 			GameObject levelGo = Instantiate (levelBtnObj);
 			levelGo.name = "Level" + i;
 			levelGo.transform.SetParent (LevelItemRoot);
-			levelGo.transform.localPosition = startPos + new Vector3(col * HorizontalSpacing + packageIndex * 720, - row * VerticalSpacing);
+			levelGo.transform.localPosition = startPos + new Vector3(col * HorizontalSpacing + packageIndex * PageView.PageDistance, - row * VerticalSpacing);
 			levelGo.transform.localScale = Vector3.one;
 
 			LevelButton level = levelGo.GetComponent<LevelButton>();
@@ -57,7 +57,7 @@ public class LevelView : UIBase {
 	        LevelBtns[i].UpdateBtnState(i+1);
 	    }
 
-	    int pageIndex = PlayerInfo.CurrentPlayer.CurrentLevelIndex/16 + 1;
+	    int pageIndex = (PlayerInfo.CurrentPlayer.CurrentLevelIndex - 1)/16 + 1;
         PageView.SetShowPage(pageIndex);
 
 	}

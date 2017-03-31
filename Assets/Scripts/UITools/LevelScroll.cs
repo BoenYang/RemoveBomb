@@ -92,7 +92,7 @@ public class LevelScroll : MonoBehaviour
         }
 
         curPageIndex = pageIndex;
-        targetPos = originPos + (pageIndex - 1) * new Vector3(PageDistance, 0);
+        targetPos = originPos - (pageIndex - 1) * new Vector3(PageDistance, 0);
         if (useAnimation)
         {
             isMoveEnd = false;

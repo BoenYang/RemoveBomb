@@ -78,7 +78,7 @@ public class NormalMode : GameModeBase
 
     private void LoadLevel()
     {
-        int package = currentLevelIndex / 16 + 1;
+        int package = (currentLevelIndex - 1) / 16 + 1;
 
         GameObject levelObj = Resources.Load<GameObject>("level/Level" + currentLevelIndex);
         levelGo = GameObject.Instantiate(levelObj);
