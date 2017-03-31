@@ -26,7 +26,7 @@ public class PlayerControl : MonoBehaviour
 
 	    if (Input.GetMouseButton(0))
 	    {
-            Vector3 trailPosition = UIManager.UICamera.ScreenToWorldPoint(Input.mousePosition);
+			Vector3 trailPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 	        trailPosition.z = 1;
             Trail.gameObject.transform.position = trailPosition;
 	    }
@@ -34,8 +34,8 @@ public class PlayerControl : MonoBehaviour
 	    if (Input.GetMouseButtonUp(0))
 	    {
 	        endPoint = Input.mousePosition;
-	        Vector3 start = UIManager.UICamera.ScreenToWorldPoint(startPoint);
-	        Vector3 end = UIManager.UICamera.ScreenToWorldPoint(endPoint);
+			Vector3 start = Camera.main.ScreenToWorldPoint(startPoint);
+			Vector3 end = Camera.main.ScreenToWorldPoint(endPoint);
             List<SpriteSlicer2DSliceInfo> spriteSlicer2DSliceInfos = new List<SpriteSlicer2DSliceInfo>();
             SpriteSlicer2D.SliceAllSprites(start,end,true,ref spriteSlicer2DSliceInfos,LayerMask.GetMask(new string[]{"Cut"}));
 	        for (int i = 0; i < spriteSlicer2DSliceInfos.Count; i++)
