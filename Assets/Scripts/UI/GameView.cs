@@ -53,8 +53,7 @@ public class GameView : UIBase
 
     private void OnGetStar(UIMsg msg)
     {
-
-        int startCount = GameScene.Instance.GetGameMode<NormalMode>().StarCount;
+        int startCount = (int) msg.args[0];
         GlobalMng.GlobalSingleton<AudioMng>().PlaySound(MusicPath.CatchStar + startCount);
         StarList[startCount - 1].ShowStar();
     }

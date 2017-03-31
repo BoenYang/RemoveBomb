@@ -8,7 +8,7 @@ public class NormalMode : GameModeBase
         get { return "Normal"; }
     }
 
-    public int StarCount;
+    private int starCount;
 
     private int currentLevelIndex;
 
@@ -19,7 +19,7 @@ public class NormalMode : GameModeBase
     public override void Init()
     {
         UIManager.OpenPanel("GameView", true);
-		currentLevelIndex = PlayerInfo.CurrentPlayer.SelectedLevelIndex;
+        currentLevelIndex = PlayerInfo.CurrentPlayer.SelectedLevelIndex;
     }
 
     public override void StartGame()
@@ -28,7 +28,7 @@ public class NormalMode : GameModeBase
 		Time.timeScale = 1.0f;
 		UIManager.DispatchMsg("ResetGame");
 
-        StarCount = 0;
+        starCount = 0;
         LoadLevel();
         StartCoroutine(GameLoop());
     }
@@ -50,7 +50,7 @@ public class NormalMode : GameModeBase
 	{
         base.GameResult();
         Time.timeScale = 1.0f;
-        UIManager.OpenPanel ("ResultView",false,StarCount);
+        UIManager.OpenPanel ("ResultView",false,starCount,currentLevelIndex);
 	}
 
     public override void PauseGame()
@@ -67,8 +67,8 @@ public class NormalMode : GameModeBase
 
     public void GetStar()
     {
-        StarCount++;
-        UIManager.DispatchMsg("GetStar");
+        starCount++;
+        UIManager.DispatchMsg("GetStar",starCount);
     }
 
     public void NextLevel()
@@ -104,7 +104,7 @@ public class NormalMode : GameModeBase
 			if (bombs == null || bombs.Length == 0)
 			{
 				GameRunning = false;
-                PlayerInfo.CurrentPlayer.PassLevel(currentLevelIndex,StarCount);
+                PlayerInfo.CurrentPlayer.PassLevel(currentLevelIndex, starCount);
 				StartCoroutine(GameWinDelay(1F));
 			}
 			yield return new WaitForEndOfFrame ();

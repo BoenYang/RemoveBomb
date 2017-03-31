@@ -4,79 +4,106 @@ using DG.Tweening;
 
 public class LevelScroll : MonoBehaviour
 {
+    public Transform PageRoot;
 
-    private Vector3 startPoint;
+    public int PageCount = 2;
 
-    private Vector3 endPoint;
+    public float MinPageFlipDistance;
 
-    public Vector3 targetPos;
+    public int PageDistance = 720;
 
-    public Vector3 startPos;
+    private Vector3 touchStartPos;
 
-    public int CurrentPack = 1;
+    private Vector3 touchCurPos;
 
-    public float distance;
+    private Vector3 targetPos;
 
-    public float dir;
+    private Vector3 startPos;
 
-    public bool moveEnd;
+    private Vector3 originPos;
 
-	public Transform MoveTr;
+    //翻页方向
+    private float flipDir;
+
+    private bool isMoveEnd;
+
+    private int curPageIndex = 0;
 
     private bool click;
 
     private void Start()
     {
-        targetPos = transform.localPosition;
-        moveEnd = true;
+        originPos = PageRoot.localPosition;
+        isMoveEnd = true;
     }
 
     void Update ()
 	{
 		Ray ray = UIManager.UICamera.ScreenPointToRay(Input.mousePosition);
 	    bool inArea = Physics.Raycast(ray,float.PositiveInfinity,LayerMask.GetMask(new string[]{"UI"}));
-	    if (inArea && moveEnd)
+	    if (inArea && isMoveEnd)
 	    {
-	        if (Input.GetMouseButtonDown(0))
+	        if (Input.GetMouseButtonDown(0))        //鼠标按下
 	        {
-	            startPoint = Input.mousePosition;
-	            startPos = transform.localPosition;
+	            touchStartPos = Input.mousePosition;
+	            startPos = PageRoot.localPosition;
 	            click = true;
-
 	        }
 
-	        if (Input.GetMouseButton(0) && click)
+	        if (Input.GetMouseButton(0) && click)   //鼠标移动
 	        {
-	            endPoint = Input.mousePosition;
-	            distance = Mathf.Abs(endPoint.x - startPoint.x);
-                dir = Mathf.Sign(endPoint.x - startPoint.x);
-				MoveTr.localPosition = startPos + new Vector3(distance*2, 0)*dir;
-	        }
+	            touchCurPos = Input.mousePosition;
+	            MinPageFlipDistance = Mathf.Abs(touchCurPos.x - touchStartPos.x);
+                flipDir = Mathf.Sign(touchCurPos.x - touchStartPos.x);
+				PageRoot.localPosition = startPos + new Vector3(MinPageFlipDistance, 0)*flipDir;
+            }
 
-	        if (Input.GetMouseButtonUp(0) && click)
+	        if (Input.GetMouseButtonUp(0) && click) //鼠标抬起
 	        {
-                if (distance > 50)
+                if (MinPageFlipDistance > 50)
                 {
-                    int tempPack = CurrentPack - (int) dir*1;
-
-                    if (tempPack > 0 && tempPack < 3)
+                    int movePageIndex = curPageIndex - (int) flipDir;
+                    if (movePageIndex >= 1 && movePageIndex <= PageCount)  
                     {
-                        CurrentPack = tempPack;
-                        targetPos = startPos + new Vector3(720, 0)*dir;
+                        curPageIndex = movePageIndex;
+                        targetPos = startPos + new Vector3(PageDistance, 0)*flipDir;
                     }
                     else
                     {
                         targetPos = startPos;
                     }
                 }
-	            moveEnd = false;
 	            click = false;
-				DOTween.To(() => 	MoveTr.localPosition, (x) => MoveTr.localPosition = x,
-                     targetPos, 0.4f).OnComplete(() =>
-                     {
-                         moveEnd = true;
-                     });
+
+                isMoveEnd = false;
+                PageRoot.DOLocalMove(targetPos, 0.4f).OnComplete(() =>
+	            {
+	                isMoveEnd = true;
+	            });
 	        }
 	    }
 	}
+
+    public void SetShowPage(int pageIndex,bool useAnimation = false)
+    {
+        if (curPageIndex == pageIndex)
+        {
+            return;
+        }
+
+        curPageIndex = pageIndex;
+        targetPos = originPos + (pageIndex - 1) * new Vector3(PageDistance, 0);
+        if (useAnimation)
+        {
+            isMoveEnd = false;
+            PageRoot.DOLocalMove(targetPos, 0.4f).OnComplete(() =>
+            {
+                isMoveEnd = true;
+            });
+        }
+        else
+        {
+            PageRoot.transform.GetComponent<RectTransform>().anchoredPosition = targetPos;
+        }
+    }
 }

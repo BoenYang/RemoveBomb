@@ -18,6 +18,8 @@ public class LevelView : UIBase {
 
 	public float HorizontalSpacing = 100f;
 
+    public LevelScroll PageView;
+
 	private GameObject levelBtnObj = null;
 
 	public override void OnInit ()
@@ -44,7 +46,6 @@ public class LevelView : UIBase {
 			LevelButton level = levelGo.GetComponent<LevelButton>();
 			level.Init ();
             LevelBtns.Add(level);
-
         }
 	}
 
@@ -55,6 +56,10 @@ public class LevelView : UIBase {
 	    {
 	        LevelBtns[i].UpdateBtnState(i+1);
 	    }
+
+	    int pageIndex = PlayerInfo.CurrentPlayer.CurrentLevelIndex/16 + 1;
+        PageView.SetShowPage(pageIndex);
+
 	}
 
 	private void OnBackClick(){

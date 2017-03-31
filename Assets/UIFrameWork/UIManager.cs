@@ -136,13 +136,12 @@ public class UIManager : MonoBehaviour
         }
     }
 
-    public static void DispatchMsg(string msgType,UIMsg msg = null)
+    public static void DispatchMsg(string msgType,params object[] args)
     {
-        UIMsg m = msg;
-        if (msg == null)
-        {
-            m = new UIMsg();
-        }
+        UIMsg m = new UIMsg();
+
+        m.MsgType = msgType;
+        m.args = args;
 
         if (uiMsgDict.ContainsKey(msgType))
         {

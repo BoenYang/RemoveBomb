@@ -18,6 +18,8 @@ public class ResultView : UIBase {
 
     private bool isAnimating;
 
+    private int currentLevelIndex;
+
 	public override void OnInit ()
 	{
 		BackToLevelView.onClick.AddListener (OnBackClick);
@@ -28,8 +30,18 @@ public class ResultView : UIBase {
     public override void OnRefresh()
     {
         starCount = (int)Args[0];
+        currentLevelIndex = (int) Args[1];
         StarList.ForEach((s) => s.HideStar());
         StartCoroutine(ShowStarEffect());
+
+        if (currentLevelIndex >= 32)
+        {
+            NextLevel.gameObject.SetActive(false);
+        }
+        else
+        {
+            NextLevel.gameObject.SetActive(true);
+        }
     }
 
     private IEnumerator ShowStarEffect()
