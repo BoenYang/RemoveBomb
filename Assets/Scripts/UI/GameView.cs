@@ -1,6 +1,4 @@
-﻿
-using System.Collections.Generic;
-using UnityEngine;
+﻿using System.Collections.Generic;
 using UnityEngine.UI;
 
 public class GameView : UIBase
@@ -19,6 +17,7 @@ public class GameView : UIBase
 
         AddMsgListener("GetStar",OnGetStar);
         AddMsgListener("ResetGame",OnResetGame);
+
 	}
 
     public override void OnRefresh()

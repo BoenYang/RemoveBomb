@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
+using GoogleMobileAds.Api;
 
 public class MainView : UIBase {
 
@@ -15,6 +16,8 @@ public class MainView : UIBase {
 		StartBtn.onClick.AddListener (OnStartClick);
 		AudioToggle.onValueChanged.AddListener (OnAudioToggleValChange);
 
+        AdmobTools.Banner.RequestBanner(AdSize.SmartBanner,AdPosition.Top);
+        AdmobTools.Banner.BannerView.Show();
 	}
 
     public override void OnRefresh()

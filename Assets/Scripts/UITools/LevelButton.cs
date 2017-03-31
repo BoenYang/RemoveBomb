@@ -41,7 +41,7 @@ public class LevelButton : MonoBehaviour{
     private void OnBtnClick()
     {
         GlobalMng.GlobalSingleton<AudioMng>().PlaySound(MusicPath.Click);
-        if (!locked)
+        //if (!locked)
         {
             PlayerInfo.CurrentPlayer.SelectedLevelIndex = levelIndex;
             SceneManager.LoadScene("GameScene");
