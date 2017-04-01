@@ -10,14 +10,14 @@ public class LevelReader
 {
     public static string levelFilePath = "_Level/File";
 
-    [MenuItem("YBW/ClearPlayerInfo")]
+    [MenuItem("FallingBall/ClearPlayerInfo")]
     public static void CleanPlayerPrefs()
     {
         PlayerPrefs.DeleteAll();
         Debug.Log("User Data Cleaned");
     }
 
-    [MenuItem("YBW/ReadLevel")]
+    [MenuItem("FallingBall/ReadLevel")]
     public static void ReadLevelFile()
     {
         string path = Application.dataPath;
