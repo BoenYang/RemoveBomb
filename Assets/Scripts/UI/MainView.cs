@@ -16,13 +16,14 @@ public class MainView : UIBase {
 		StartBtn.onClick.AddListener (OnStartClick);
 		AudioToggle.onValueChanged.AddListener (OnAudioToggleValChange);
 
-        AdmobTools.Banner.RequestBanner(AdSize.SmartBanner,AdPosition.Top);
+        AdmobTools.Banner.RequestBanner(null,AdPosition.Top);
         AdmobTools.Banner.BannerView.Show();
 	}
 
     public override void OnRefresh()
     {
-		musicOn = PlayerPrefs.GetInt ("MusicOn",1) == 1;
+
+        musicOn = PlayerPrefs.GetInt ("MusicOn",1) == 1;
 		AudioToggle.isOn = !musicOn;
 		GlobalMng.GlobalSingleton<AudioMng> ().MusicOn = musicOn;
 		GlobalMng.GlobalSingleton<AudioMng> ().SoundOn = musicOn;

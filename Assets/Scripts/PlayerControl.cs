@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
-using UnityEngine.Assertions.Comparers;
 
 public class PlayerControl : MonoBehaviour
 {
@@ -11,17 +10,22 @@ public class PlayerControl : MonoBehaviour
 
     public TrailRenderer Trail;
 
+    private bool click = false;
+
 	void Update () {
 
 		if (!GameScene.Instance.Game.GameRunning || GameScene.Instance.Game.GamePaused)
-	    {
+		{
+		    click = false;
             return;
         }
 
 	    if (Input.GetMouseButtonDown(0))
 	    {
 	        startPoint = Input.mousePosition;
-            //Trail.Clear();
+            UIManager.DispatchMsg("TouchDown",startPoint);
+	        click = true;
+	        //Trail.Clear();
 	    }
 
 	    if (Input.GetMouseButton(0))
@@ -29,12 +33,17 @@ public class PlayerControl : MonoBehaviour
 			Vector3 trailPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 	        trailPosition.z = 1;
             Trail.gameObject.transform.position = trailPosition;
-	    }
+            UIManager.DispatchMsg("TouchMove", Input.mousePosition);
+        }
 
-	    if (Input.GetMouseButtonUp(0))
+	    if (Input.GetMouseButtonUp(0) && click)
 	    {
+	        click = false;
 	        endPoint = Input.mousePosition;
-			Vector3 start = Camera.main.ScreenToWorldPoint(startPoint);
+
+            UIManager.DispatchMsg("TouchUp", endPoint);
+
+            Vector3 start = Camera.main.ScreenToWorldPoint(startPoint);
 			Vector3 end = Camera.main.ScreenToWorldPoint(endPoint);
             List<SpriteSlicer2DSliceInfo> spriteSlicer2DSliceInfos = new List<SpriteSlicer2DSliceInfo>();
             SpriteSlicer2D.SliceAllSprites(start,end,true,ref spriteSlicer2DSliceInfos,LayerMask.GetMask(new string[]{"Cut"}));

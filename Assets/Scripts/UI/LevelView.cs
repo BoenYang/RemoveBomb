@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using System.Collections.Generic;
+using GoogleMobileAds.Api;
 
 public class LevelView : UIBase {
 
@@ -51,7 +52,12 @@ public class LevelView : UIBase {
 
 	public override void OnRefresh ()
 	{
-		GlobalMng.GlobalSingleton<AudioMng> ().PlayMusic (MusicPath.Background);
+	    if (AdmobTools.Banner.AdPos != AdPosition.Top)
+	    {
+            AdmobTools.Banner.RequestBanner(null,AdPosition.Top);
+        }
+
+	    GlobalMng.GlobalSingleton<AudioMng> ().PlayMusic (MusicPath.Background);
 	    for (int i = 0; i < LevelBtns.Count; i++)
 	    {
 	        LevelBtns[i].UpdateBtnState(i+1);

@@ -13,6 +13,8 @@ public class PlayerInfo
 
     public int SelectedLevelIndex;
 
+    public bool isDebug = false;
+
     public static void ReadPlayerInfo()
     {
         PlayerInfo playerInfo = new PlayerInfo();
@@ -30,6 +32,19 @@ public class PlayerInfo
                 playerInfo.LevelStars[i] = star;
             }
         }
+        playerInfo.isDebug = false;
+        CurrentPlayer = playerInfo;
+    }
+
+    public static void DebugPlayerInfo()
+    {
+        PlayerInfo playerInfo = new PlayerInfo();
+        playerInfo.CurrentLevelIndex = 32;
+        playerInfo.LevelStars = new int[32];
+        Array.Clear(playerInfo.LevelStars, 0, playerInfo.LevelStars.Length);
+
+        playerInfo.SelectedLevelIndex = 1;
+        playerInfo.isDebug = true;
         CurrentPlayer = playerInfo;
     }
 
@@ -49,8 +64,15 @@ public class PlayerInfo
         SavePlayerInfo();
     }
 
+  
+
     private void SavePlayerInfo()
     {
+        if (isDebug)
+        {
+            return;
+        }
+
         PlayerPrefs.SetInt("CurrentLevelIndex",CurrentLevelIndex);
         string levelStr = "";
         for (int i = 0; i < LevelStars.Length; i++)

@@ -1106,16 +1106,7 @@ public class Reporter : MonoBehaviour
 		GUILayout.EndHorizontal();
 
 		if (GUILayout.Button(closeContent, barStyle, GUILayout.Width(size.x * 2), GUILayout.Height(size.y * 2))) {
-			show = false;
-			ReporterGUI gui = gameObject.GetComponent<ReporterGUI>();
-			DestroyImmediate(gui);
-
-			try {
-				gameObject.SendMessage("OnHideReporter");
-			}
-			catch (System.Exception e) {
-				Debug.LogException(e);
-			}
+	        doClose();
 		}
 
 
@@ -1126,8 +1117,24 @@ public class Reporter : MonoBehaviour
 		GUILayout.EndArea();
 	}
 
+    private void doClose()
+    {
+        show = false;
+        ReporterGUI gui = gameObject.GetComponent<ReporterGUI>();
+        DestroyImmediate(gui);
 
-	Rect tempRect;
+        try
+        {
+            gameObject.SendMessage("OnHideReporter");
+        }
+        catch (System.Exception e)
+        {
+            Debug.LogException(e);
+        }
+    }
+
+
+    Rect tempRect;
 	void DrawLogs()
 	{
 
@@ -1795,8 +1802,15 @@ public class Reporter : MonoBehaviour
 #endif
 
 		calculateStartIndex();
-		if (!show && isGestureDone()) {
-			doShow();
+		if (isGestureDone()) {
+		    if (!show)
+		    {
+		        doShow();
+		    }
+		    else
+		    {
+                doClose();
+            }
 		}
 
 

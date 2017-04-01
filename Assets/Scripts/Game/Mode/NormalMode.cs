@@ -19,6 +19,10 @@ public class NormalMode : GameModeBase
     public override void Init()
     {
         UIManager.OpenPanel("GameView", true);
+        if (PlayerInfo.CurrentPlayer == null)
+        {
+            PlayerInfo.DebugPlayerInfo();
+        }
         currentLevelIndex = PlayerInfo.CurrentPlayer.SelectedLevelIndex;
     }
 
@@ -79,6 +83,12 @@ public class NormalMode : GameModeBase
     private void LoadLevel()
     {
         int package = (currentLevelIndex - 1) / 16 + 1;
+
+        if (package > 2)
+        {
+            package = 2;
+        }
+        Debug.Log(currentLevelIndex);
 
         GameObject levelObj = Resources.Load<GameObject>("level/Level" + currentLevelIndex);
         levelGo = GameObject.Instantiate(levelObj);

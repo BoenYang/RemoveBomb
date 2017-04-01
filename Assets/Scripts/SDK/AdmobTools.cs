@@ -8,6 +8,8 @@ public class AdmobTools
     {
         public static BannerView BannerView;
 
+        public static AdPosition AdPos;
+
         public static void RequestBanner(AdSize size = null, AdPosition pos = AdPosition.Bottom)
         {
 
@@ -30,12 +32,20 @@ public class AdmobTools
                 bannerSize = size;
             }
 
+            if (BannerView != null)
+            {
+                BannerView.Destroy();
+                BannerView = null;
+            }
+
             // Create a 320x50 banner at the top of the screen.
             BannerView = new BannerView(adUnitId, bannerSize, pos);
 
             // Create an empty ad request.
             AdRequest request = new AdRequest.Builder()
                 .Build();
+
+            AdPos = pos;
 
             // Load the banner with the request.
             BannerView.LoadAd(request);
