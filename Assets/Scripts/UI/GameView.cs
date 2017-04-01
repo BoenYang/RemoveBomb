@@ -29,9 +29,10 @@ public class GameView : UIBase
         AddMsgListener("TouchDown",OnTouchDown);
         AddMsgListener("TouchMove",OnTouchMove);
         AddMsgListener("TouchUp",OnTouchUp);
+        AddMsgListener("GetResult", OnGameResult);
         CutLine.gameObject.SetActive(false);
 
-	    screenSize = GetComponent<RectTransform>().sizeDelta;
+	    screenSize = new Vector2(Screen.width,Screen.height);
 	}
 
     public override void OnRefresh()
@@ -87,8 +88,10 @@ public class GameView : UIBase
     {
         CutLine.gameObject.SetActive(true);
         startPos = (Vector3)msg.args[0];
+        Debug.Log("屏幕大小 " + screenSize);
+        Debug.Log("点击位置 " + startPos);
         startPos = startPos + new Vector3(-screenSize.x / 2, -screenSize.y/2);
-
+        Debug.Log("UI位置" + startPos);
         CutLine.rectTransform.anchoredPosition = startPos;
     }
 
@@ -115,6 +118,11 @@ public class GameView : UIBase
     }
 
     private void OnTouchUp(UIMsg msg)
+    {
+        CutLine.gameObject.SetActive(false);
+    }
+
+    private void OnGameResult(UIMsg msg)
     {
         CutLine.gameObject.SetActive(false);
     }

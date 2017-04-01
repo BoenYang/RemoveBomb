@@ -123,6 +123,7 @@ public class NormalMode : GameModeBase
 
 	private IEnumerator GameWinDelay(float s){
 		yield return new WaitForSeconds(s);
+        UIManager.DispatchMsg("GetResult");
 		GameResult ();
 	}
 }
