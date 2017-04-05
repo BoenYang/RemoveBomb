@@ -18,6 +18,8 @@ public class GameView : UIBase
 
     private Vector2 screenSize;
 
+    private Vector2 panelSize;
+
 
 	public override void OnInit ()
 	{
@@ -33,6 +35,7 @@ public class GameView : UIBase
         CutLine.gameObject.SetActive(false);
 
 	    screenSize = new Vector2(Screen.width,Screen.height);
+	    panelSize = GetComponent<RectTransform>().sizeDelta;
 	}
 
     public override void OnRefresh()
@@ -88,27 +91,30 @@ public class GameView : UIBase
     {
         CutLine.gameObject.SetActive(true);
         startPos = (Vector3)msg.args[0];
-        Debug.Log("屏幕大小 " + screenSize);
-        Debug.Log("点击位置 " + startPos);
-        startPos = startPos + new Vector3(-screenSize.x / 2, -screenSize.y/2);
-        Debug.Log("UI位置" + startPos);
+
+        Vector3 viewPos = UIManager.UICamera.ScreenToViewportPoint(startPos) - new Vector3(0.5f,0.5f,0);
+
+        startPos.x =  panelSize.x*viewPos.x ;
+        startPos.y = panelSize.y*viewPos.y;
+
+        Debug.Log("点击位置 " + startPos + " 视口位置 " + viewPos);
+
         CutLine.rectTransform.anchoredPosition = startPos;
     }
 
     private void OnTouchMove(UIMsg msg)
     {
         Vector3 pos = (Vector3)msg.args[0];
-        pos = pos + new Vector3(-screenSize.x / 2, -screenSize.y / 2);
+        Vector3 viewPos = UIManager.UICamera.ScreenToViewportPoint(pos) - new Vector3(0.5f, 0.5f, 0);
+        pos.x = panelSize.x * viewPos.x;
+        pos.y = panelSize.y * viewPos.y;
 
         float distance = Vector2.Distance(startPos, pos);
-
         float fillAmount = distance/1500;
         CutLine.fillAmount = fillAmount;
 
         Vector2 dir = pos - startPos;
-
         float angle = -Vector2.Angle(dir, Vector2.right);
-
         if (startPos.y < pos.y)
         {
             angle = -angle;
