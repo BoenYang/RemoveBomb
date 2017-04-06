@@ -36,7 +36,9 @@ public class MainView : UIBase {
 	        {
 	            signed = success;
 	            signing = false;
+                Debug.Log("登录" + signed);
 	        });
+
 	    }
 	    else
 	    {

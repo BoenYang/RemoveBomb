@@ -24,11 +24,11 @@
 
 public static class GPGSIds
 {
-        public const string achievement_a1 = "CgkIlvyUsLYdEAIQAQ"; // <GPGSID>
-        public const string achievement_a2 = "CgkIlvyUsLYdEAIQAg"; // <GPGSID>
-        public const string achievement_a3 = "CgkIlvyUsLYdEAIQAw"; // <GPGSID>
-        public const string achievement_a4 = "CgkIlvyUsLYdEAIQBA"; // <GPGSID>
-        public const string achievement_a5 = "CgkIlvyUsLYdEAIQBQ"; // <GPGSID>
+        public const string achievement_reach_the_limit_get_96_stars = "CgkIlvyUsLYdEAIQBQ"; // <GPGSID>
+        public const string achievement_get_48_stars = "CgkIlvyUsLYdEAIQAw"; // <GPGSID>
+        public const string achievement_get_15_stars = "CgkIlvyUsLYdEAIQAg"; // <GPGSID>
+        public const string achievement_become_more_proficient_get_60_stars = "CgkIlvyUsLYdEAIQBA"; // <GPGSID>
+        public const string achievement_first_attpact_get_3_stars = "CgkIlvyUsLYdEAIQAQ"; // <GPGSID>
 
 }
 

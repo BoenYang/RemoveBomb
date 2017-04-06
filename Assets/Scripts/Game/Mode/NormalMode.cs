@@ -116,7 +116,6 @@ public class NormalMode : GameModeBase
 				GameRunning = false;
                 PlayerInfo.CurrentPlayer.PassLevel(currentLevelIndex, starCount);
 				StartCoroutine(GameWinDelay(1F));
-                Debug.Log("win");
             }
 			yield return new WaitForEndOfFrame ();
 		}

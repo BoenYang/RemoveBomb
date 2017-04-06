@@ -1,6 +1,7 @@
 ﻿
 using System;
 using System.Collections.Generic;
+using GooglePlayGames.OurUtils;
 using UnityEngine;
 
 public class PlayerInfo
@@ -62,9 +63,37 @@ public class PlayerInfo
             CurrentLevelIndex++;
         }
         SavePlayerInfo();
+
+        int totalStar = 0;
+        for (int i = 0; i < LevelStars.Length; i++)
+        {
+            totalStar += LevelStars[i];
+        }
+
+        if (PlatformUtils.Supported)
+        {
+            switch (totalStar)
+            {
+
+                case 3:
+                    GooglePlayTools.IncrementAchievement(GPGSIds.achievement_first_attpact_get_3_stars, totalStar);
+                    break;
+                case 15:
+                    GooglePlayTools.IncrementAchievement(GPGSIds.achievement_get_15_stars, totalStar);
+                    break;
+                case 48:
+                    GooglePlayTools.IncrementAchievement(GPGSIds.achievement_get_48_stars, totalStar);
+                    break;
+                case 60:
+                    GooglePlayTools.IncrementAchievement(GPGSIds.achievement_become_more_proficient_get_60_stars, totalStar);
+                    break;
+                case 96:
+                    GooglePlayTools.IncrementAchievement(GPGSIds.achievement_reach_the_limit_get_96_stars, totalStar);
+                    break;
+            }
+        }
     }
 
-  
 
     private void SavePlayerInfo()
     {

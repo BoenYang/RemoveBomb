@@ -40,6 +40,7 @@ public class GooglePlayTools{
 
     public static void ReportAchieveProcess(string achieve,float process)
     {
+        Debug.Log("更新成就" + achieve + "  " + process);
         Social.ReportProgress(achieve,process, (success) =>
         {
             if (success)
@@ -55,6 +56,7 @@ public class GooglePlayTools{
 
     public static void IncrementAchievement(string achieve, int step)
     {
+        Debug.Log("上传成就" + achieve + "  " + step);
         PlayGamesPlatform.Instance.IncrementAchievement(achieve,step, (success) =>
         {
             if (success)
