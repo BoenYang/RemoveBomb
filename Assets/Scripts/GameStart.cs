@@ -16,6 +16,8 @@ public class GameStart : MonoBehaviour {
 
 	    PlayerInfo.ReadPlayerInfo();
 		UIManager.OpenPanel ("MainView");
+
+        Destroy(gameObject);
 	}
 	
 }
