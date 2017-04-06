@@ -80,6 +80,9 @@ public class PlayerControl : MonoBehaviour
                     //childRigidBody.AddForceAtPosition(childRigidBody.mass * normal * 0.5f ,cutLineMidPos,ForceMode2D.Impulse);
 
                     childObject.layer = 8;
+                    MeshRenderer sr = childObject.GetComponent<MeshRenderer>();
+	                sr.sortingLayerName = "Default";
+	                sr.sortingOrder = 5;
 	            }
 	        }
 	    }

@@ -8,6 +8,8 @@ public class MainView : UIBase {
 
 	public Button StartBtn;
 
+    public Button ShopBtn;
+
 	public Toggle AudioToggle;
 
 	private bool musicOn;
@@ -20,6 +22,8 @@ public class MainView : UIBase {
 	{
 		StartBtn.onClick.AddListener (OnStartClick);
 		AudioToggle.onValueChanged.AddListener (OnAudioToggleValChange);
+
+	    ShopBtn.interactable = false;
 
         AdmobTools.Banner.RequestBanner(null,AdPosition.Top);
         AdmobTools.Banner.BannerView.Show();

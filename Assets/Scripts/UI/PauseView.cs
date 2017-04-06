@@ -24,6 +24,8 @@ public class PauseView : UIBase
 
 		SoundToggle.onValueChanged.AddListener (OnAudioToggleValChange);
 
+        ShopBtn.interactable = false;
+
     }
 
 

@@ -24,11 +24,11 @@
 
 public static class GPGSIds
 {
-        public const string achievement_ac2 = "CgkI3Kidqf4BEAIQAQ"; // <GPGSID>
-        public const string achievement_ac3 = "CgkI3Kidqf4BEAIQAg"; // <GPGSID>
-        public const string achievement_ac4 = "CgkI3Kidqf4BEAIQAw"; // <GPGSID>
-        public const string achievement_ac5 = "CgkI3Kidqf4BEAIQBA"; // <GPGSID>
-        public const string achievement_ac1 = "CgkI3Kidqf4BEAIQAA"; // <GPGSID>
+        public const string achievement_a1 = "CgkIlvyUsLYdEAIQAQ"; // <GPGSID>
+        public const string achievement_a2 = "CgkIlvyUsLYdEAIQAg"; // <GPGSID>
+        public const string achievement_a3 = "CgkIlvyUsLYdEAIQAw"; // <GPGSID>
+        public const string achievement_a4 = "CgkIlvyUsLYdEAIQBA"; // <GPGSID>
+        public const string achievement_a5 = "CgkIlvyUsLYdEAIQBQ"; // <GPGSID>
 
 }
 

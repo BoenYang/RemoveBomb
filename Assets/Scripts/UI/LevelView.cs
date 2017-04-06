@@ -7,6 +7,8 @@ public class LevelView : UIBase {
 
 	public Button BackBtn;
 
+    public Button ShopBtn;
+
 	public Transform TittleRoot;
 
 	public Transform LevelItemRoot;
@@ -26,6 +28,8 @@ public class LevelView : UIBase {
 	public override void OnInit ()
 	{
 		BackBtn.onClick.AddListener (OnBackClick);
+
+	    ShopBtn.interactable = false;
 
 		levelBtnObj = Resources.Load<GameObject> ("UITools/LevelBtn");
 

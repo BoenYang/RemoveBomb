@@ -110,13 +110,14 @@ public class NormalMode : GameModeBase
 	protected override IEnumerator GameLoop ()
 	{
 		while (GameRunning) {
-			GameObject[] bombs = GameObject.FindGameObjectsWithTag("Bomb");
+			Bomb[] bombs = GameObject.FindObjectsOfType<Bomb>();
 			if (bombs == null || bombs.Length == 0)
 			{
 				GameRunning = false;
                 PlayerInfo.CurrentPlayer.PassLevel(currentLevelIndex, starCount);
 				StartCoroutine(GameWinDelay(1F));
-			}
+                Debug.Log("win");
+            }
 			yield return new WaitForEndOfFrame ();
 		}
 	}

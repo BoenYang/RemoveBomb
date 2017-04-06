@@ -662,6 +662,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   StartBtn: {fileID: 11408380}
+  ShopBtn: {fileID: 11412362}
   AudioToggle: {fileID: 114000012180365700}
 --- !u!114 &114000012180365700
 MonoBehaviour:

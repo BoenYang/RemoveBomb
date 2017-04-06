@@ -1142,6 +1142,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   BackBtn: {fileID: 11488114}
+  ShopBtn: {fileID: 11444994}
   TittleRoot: {fileID: 22458944}
   LevelItemRoot: {fileID: 224000010119107312}
   LevelBtns: []
