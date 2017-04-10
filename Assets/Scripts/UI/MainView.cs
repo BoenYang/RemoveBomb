@@ -2,6 +2,8 @@
 using UnityEngine.UI;
 using System.Collections;
 using GoogleMobileAds.Api;
+using GooglePlayGames.BasicApi;
+using GooglePlayGames.BasicApi.SavedGame;
 using GooglePlayGames.OurUtils;
 
 public class MainView : UIBase {
@@ -39,6 +41,21 @@ public class MainView : UIBase {
 	            signed = success;
 	            signing = false;
                 Debug.Log("登录" + signed);
+
+	            if (success)
+	            {
+                    GooglePlayTools.OpendSavedGame("AutoSave",DataSource.ReadCacheOrNetwork, ConflictResolutionStrategy.UseLongestPlaytime,
+                        (data) =>
+                        {
+                            Debug.Log(data);
+                            Debug.Log(data.Length);
+                            if (data.Length != 0)
+                            {
+                                PlayerInfo.ReadFromBytes(data);
+                            }
+                           
+                        });
+                }
 	        });
 
 	    }

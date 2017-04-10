@@ -85,43 +85,90 @@ public class GooglePlayTools{
         });
     }
 
-    public static void SaveGame(ISavedGameMetadata game, byte[] savedData, TimeSpan totalPlaytime)
-    {
-        ISavedGameClient savedGameClient = PlayGamesPlatform.Instance.SavedGame;
 
-        SavedGameMetadataUpdate.Builder builder = new SavedGameMetadataUpdate.Builder();
-        builder = builder.WithUpdatedPlayedTime(totalPlaytime).WithUpdatedDescription("Saved game at " + DateTime.Now);
-    
+    #region 保存游戏数据
+
+    private static Action<byte[]> openGameBytesDataCallback;
+
+    private static ISavedGameMetadata currentOpenedGameData;
+
+    public static void OpenSavedGameUI(string uiTittle,int maxDisplayGame,bool showCreateUI,bool showDeleteUI,Action<byte[]> selectedCallBack)
+    {
+        openGameBytesDataCallback = selectedCallBack;
+        ((PlayGamesPlatform)Social.Active).SavedGame.ShowSelectSavedGameUI(uiTittle, 4, false, false, OnSelectedGame);
+    }
+
+    private static void OnSelectedGame(SelectUIStatus status, ISavedGameMetadata game)
+    {
+        if (status == SelectUIStatus.SavedGameSelected)
+        {
+            Debug.Log("Success Select game: " + status);
+            string fileName = game.Filename;
+            OpendSavedGame(fileName, DataSource.ReadCacheOrNetwork,ConflictResolutionStrategy.UseLongestPlaytime, openGameBytesDataCallback);
+        }
+        else
+        {
+            Debug.Log("Error Select game: " + status);
+        }
+    }
+
+
+    public static void OpendSavedGame(string fileName,DataSource dataSource,ConflictResolutionStrategy strategy, Action<byte[]> gameOpenCallback)
+    {
+        openGameBytesDataCallback = gameOpenCallback;
+        ((PlayGamesPlatform)Social.Active).SavedGame.OpenWithAutomaticConflictResolution(fileName, dataSource, strategy, OnOpenSavedGame);
+    }
+
+    private static void OnOpenSavedGame(SavedGameRequestStatus status, ISavedGameMetadata game)
+    {
+        currentOpenedGameData = game;
+        if (status == SavedGameRequestStatus.Success)
+        {
+            Debug.Log("Success Opening game: " + status);
+            ((PlayGamesPlatform)Social.Active).SavedGame.ReadBinaryData(game, OnReadGameDataCallBack);
+        }
+        else
+        {
+            Debug.Log("Error Opening game: " + status);
+        }
+    }
+
+    private static void OnReadGameDataCallBack(SavedGameRequestStatus status, byte[] data)
+    {
+        if (status == SavedGameRequestStatus.Success)
+        {
+            Debug.Log("Success Reading game: " + status);
+            if (openGameBytesDataCallback != null)
+            {
+                openGameBytesDataCallback.Invoke(data);
+            }
+        }
+        else
+        {
+            Debug.Log("Error reading game: " + status);
+        }
+    }
+
+
+    public static void WriteGameData(byte[] data)
+    {
+        SavedGameMetadataUpdate.Builder builder = new
+        SavedGameMetadataUpdate.Builder().WithUpdatedDescription("Saved Game at " + DateTime.Now);
         SavedGameMetadataUpdate updatedMetadata = builder.Build();
-        savedGameClient.CommitUpdate(game, updatedMetadata, savedData, OnSavedGameWritten);
+        ((PlayGamesPlatform)Social.Active).SavedGame.CommitUpdate(currentOpenedGameData, updatedMetadata, data, SavedGameWritten);
     }
 
-    private static void OnSavedGameWritten(SavedGameRequestStatus status, ISavedGameMetadata game)
+    private static void SavedGameWritten(SavedGameRequestStatus status, ISavedGameMetadata game)
     {
         if (status == SavedGameRequestStatus.Success)
         {
-            Debug.Log("保存游戏数据成功");
+            Debug.Log("Game " + game.Description + " written");
         }
-        else {
-            Debug.Log("保存游戏数据失败");
-        }
-    }
-
-
-    public static void ReadSavedGameData(ISavedGameMetadata game)
-    {
-        ISavedGameClient savedGameClient = PlayGamesPlatform.Instance.SavedGame;
-        savedGameClient.ReadBinaryData(game, OnSavedGameDataRead);
-    }
-
-    private static void OnSavedGameDataRead(SavedGameRequestStatus status, byte[] data)
-    {
-        if (status == SavedGameRequestStatus.Success)
+        else
         {
-            Debug.Log("读取游戏数据成功");
-        }
-        else {
-            Debug.Log("读取游戏数据失败");
+            Debug.LogWarning("Error saving game: " + status);
         }
     }
+    
+    #endregion
 }
