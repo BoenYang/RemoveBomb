@@ -1,5 +1,4 @@
-﻿
-using System;
+﻿using System;
 using System.Collections.Generic;
 using GooglePlayGames.OurUtils;
 using UnityEngine;
@@ -51,7 +50,6 @@ public class PlayerInfo
 
     public void PassLevel(int levelIndex,int star)
     {
-		Debug.Log (levelIndex + " " + star);
         if (LevelStars[levelIndex - 1] < star)
         {
             LevelStars[levelIndex - 1] = star;
@@ -62,8 +60,36 @@ public class PlayerInfo
             CurrentLevelIndex = levelIndex;
             CurrentLevelIndex++;
         }
-        SavePlayerInfo();
 
+        SavePlayerInfo();
+        CheckAchievement();
+    }
+
+    private void SavePlayerInfo()
+    {
+        if (isDebug)
+        {
+            return;
+        }
+
+        PlayerPrefs.SetInt("CurrentLevelIndex",CurrentLevelIndex);
+        string levelStr = "";
+        for (int i = 0; i < LevelStars.Length; i++)
+        {
+            if (i != LevelStars.Length - 1)
+            {
+                levelStr += LevelStars[i] + "|";
+            }
+            else
+            {
+                levelStr += LevelStars[i].ToString();
+            }
+        }
+        PlayerPrefs.SetString("LevelStars",levelStr);
+    }
+
+    private void CheckAchievement()
+    {
         int totalStar = 0;
         for (int i = 0; i < LevelStars.Length; i++)
         {
@@ -93,29 +119,4 @@ public class PlayerInfo
             }
         }
     }
-
-
-    private void SavePlayerInfo()
-    {
-        if (isDebug)
-        {
-            return;
-        }
-
-        PlayerPrefs.SetInt("CurrentLevelIndex",CurrentLevelIndex);
-        string levelStr = "";
-        for (int i = 0; i < LevelStars.Length; i++)
-        {
-            if (i != LevelStars.Length - 1)
-            {
-                levelStr += LevelStars[i] + "|";
-            }
-            else
-            {
-                levelStr += LevelStars[i].ToString();
-            }
-        }
-        PlayerPrefs.SetString("LevelStars",levelStr);
-    }
-
 }

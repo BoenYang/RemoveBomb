@@ -85,7 +85,7 @@ public class GooglePlayTools{
         });
     }
 
-    void SaveGame(ISavedGameMetadata game, byte[] savedData, TimeSpan totalPlaytime)
+    public static void SaveGame(ISavedGameMetadata game, byte[] savedData, TimeSpan totalPlaytime)
     {
         ISavedGameClient savedGameClient = PlayGamesPlatform.Instance.SavedGame;
 
@@ -96,7 +96,7 @@ public class GooglePlayTools{
         savedGameClient.CommitUpdate(game, updatedMetadata, savedData, OnSavedGameWritten);
     }
 
-    public void OnSavedGameWritten(SavedGameRequestStatus status, ISavedGameMetadata game)
+    private static void OnSavedGameWritten(SavedGameRequestStatus status, ISavedGameMetadata game)
     {
         if (status == SavedGameRequestStatus.Success)
         {

@@ -20,7 +20,9 @@ public class MainView : UIBase {
 
 	public override void OnInit ()
 	{
-		StartBtn.onClick.AddListener (OnStartClick);
+        PlayerInfo.ReadPlayerInfo();
+
+        StartBtn.onClick.AddListener (OnStartClick);
 		AudioToggle.onValueChanged.AddListener (OnAudioToggleValChange);
 
 	    ShopBtn.interactable = false;
