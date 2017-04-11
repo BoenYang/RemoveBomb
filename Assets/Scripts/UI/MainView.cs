@@ -14,6 +14,10 @@ public class MainView : UIBase {
 
 	public Toggle AudioToggle;
 
+    public Image TittleEn;
+
+    public Image TittleZh;
+
 	private bool musicOn;
 
     private bool signed;
@@ -63,7 +67,17 @@ public class MainView : UIBase {
 	    {
             Debug.Log("该平台不支持Google Play 登录");
         }
-	}
+
+
+#if EN
+       
+        TittleEn.gameObject.SetActive(true);
+        TittleZh.gameObject.SetActive(false);
+#else
+        TittleEn.gameObject.SetActive(false);
+        TittleZh.gameObject.SetActive(true);
+#endif
+    }
 
     public override void OnRefresh()
     {

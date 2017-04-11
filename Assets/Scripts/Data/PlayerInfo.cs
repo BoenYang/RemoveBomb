@@ -227,6 +227,7 @@ public class PlayerInfo
 
         playerInfo.isDebug = false;
         CurrentPlayer = playerInfo;
+
     }
 
 }
