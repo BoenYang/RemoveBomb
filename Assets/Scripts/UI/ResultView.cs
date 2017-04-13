@@ -64,7 +64,7 @@ public class ResultView : UIBase {
 
         GameScene.Instance.Game.GameOver ();
 		UIManager.ClosePanel ("GameView");
-		ClosePanel ();
+		UIManager.CloseTop();
 		SceneManager.LoadScene("MainScene");
 	}
 

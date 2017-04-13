@@ -69,7 +69,11 @@ public class PlayerInfo
         if (needUpdate)
         {
             SaveToDisk();
-            SaveToCloud();
+
+            if (PlatformUtils.Supported)
+            {
+                SaveToCloud();
+            }
         }
 
         CheckAchievement();

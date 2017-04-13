@@ -34,6 +34,7 @@ public class CommandBuild
     {
         SetKeyStore();
         PlayerSettings.productName = ZhName;
+        PlayerSettings.SetScriptingDefineSymbolsForGroup(BuildTargetGroup.Android, "");
         BuildPipeline.BuildPlayer(s_levels, "E:\\Build\\android\\removebomb_zh_debug.apk", BuildTarget.Android, BuildOptions.None);
     }
 

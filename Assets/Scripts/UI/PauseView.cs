@@ -41,7 +41,7 @@ public class PauseView : UIBase
         GlobalMng.GlobalSingleton<AudioMng>().PlaySound(MusicPath.Click);
         GameScene.Instance.Game.GameOver();
 		UIManager.ClosePanel ("GameView");
-        ClosePanel();
+        UIManager.CloseTop();
         SceneManager.LoadScene("MainScene");
     }
 
